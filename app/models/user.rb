@@ -33,6 +33,8 @@ class User < ApplicationRecord
     inactive: 1
   }, default: 1, scope: true, predicates: true
   ## -------------------- Associations -------------------- ##
+  has_many :employees_call_centers
+  has_many :call_centers, through: :employees_call_centers
   ## -------------------- Validations --------------------- ##
   validates :role, presence: true
   validates :status, presence: true

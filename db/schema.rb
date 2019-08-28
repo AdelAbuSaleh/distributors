@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_141959) do
+ActiveRecord::Schema.define(version: 2019_08_28_144515) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2019_08_28_141959) do
     t.index ["name", "status"], name: "index_call_centers_on_name_and_status"
   end
 
+  create_table "employees_call_centers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "call_center_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["call_center_id"], name: "index_employees_call_centers_on_call_center_id"
+    t.index ["user_id"], name: "index_employees_call_centers_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.string "user_name"
@@ -43,4 +52,6 @@ ActiveRecord::Schema.define(version: 2019_08_28_141959) do
     t.index ["mobile"], name: "index_users_on_mobile", unique: true, where: "(mobile IS NOT NULL)"
   end
 
+  add_foreign_key "employees_call_centers", "call_centers", on_delete: :cascade
+  add_foreign_key "employees_call_centers", "users", on_delete: :cascade
 end

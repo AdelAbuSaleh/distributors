@@ -71,20 +71,8 @@ class UsersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
-    main_params = (
-      :full_name,
-      :user_name,
-      :email,
-      :country_code,
-      :mobile,
-      :password,
-      :role,
-      :status
-    )
-      # call_centers_attributes: CallCenter.attribute_names.map(&:to_sym).push(:_destroy) ]
-    # main_params.push(call_center_ids: []) if params[:role].eql?('super_admin')
-    # debugger
-    # main_params.push(call_centers_attributes: CallCenter.attribute_names.map(&:to_sym).push(:_destroy)) if params[:role].eql?('super_admin')
+    main_params = %i[full_name user_name email country_code mobile password role status ]
+    main_params.push(call_center_ids: []) if params[:role].eql?('employee')
     params.permit(main_params)
   end
 end

@@ -41,8 +41,10 @@ class User < ApplicationRecord
 
   # accepts_nested_attributes_for :call_centers#, reject_if: :all_blank
   ## -------------------- Validations --------------------- ##
+  # validates :role, :status, presence: true
   validates :role, presence: true
   validates :status, presence: true
+  validates :call_center_ids, presence: true, if: (->(e) { e.employee? || e.admin? })
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##
   ## ---------------------- Methods ----------------------- ##

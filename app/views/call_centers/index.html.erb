@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Call Centers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @call_centers.each do |call_center| %>
+      <tr>
+        <td><%= link_to 'Show', call_center %></td>
+        <td><%= link_to 'Edit', edit_call_center_path(call_center) %></td>
+        <td><%= link_to 'Destroy', call_center, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Call Center', new_call_center_path %>

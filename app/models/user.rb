@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -23,8 +25,9 @@ class User < ApplicationRecord
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##
   enumerize :role, in: {
-    admin: 0,
-    employee: 1
+    super_admin: 0,
+    employee: 1,
+    admin: 2
   }, default: 1, scope: true, predicates: true
 
   # User statuses
@@ -35,6 +38,8 @@ class User < ApplicationRecord
   ## -------------------- Associations -------------------- ##
   has_many :employees_call_centers
   has_many :call_centers, through: :employees_call_centers
+
+  # accepts_nested_attributes_for :call_centers#, reject_if: :all_blank
   ## -------------------- Validations --------------------- ##
   validates :role, presence: true
   validates :status, presence: true

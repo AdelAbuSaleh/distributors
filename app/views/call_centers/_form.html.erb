@@ -1,0 +1,17 @@
+<%= form_with(model: call_center, local: true) do |form| %>
+  <% if call_center.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(call_center.errors.count, "error") %> prohibited this call_center from being saved:</h2>
+
+      <ul>
+      <% call_center.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

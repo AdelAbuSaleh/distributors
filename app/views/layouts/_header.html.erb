@@ -5,9 +5,9 @@
     </div>
     <div class="div_menu" id="menu">
       <ul>
-        <li><a href="#"><font color="#7C7171">&nbsp&nbsp الرئيسية &nbsp&nbsp    </font></a></li>
+        <li><%= link_to "الرئيسية" ,root_path %> </li>
         <li><a href="#"><font color="#7C7171">&nbsp&nbsp تسجيل الدخول  &nbsp&nbsp    </font></a></li>
-        <li><a href="#"><font color="#7C7171">&nbsp&nbsp  تسجيل حساب جديد  &nbsp&nbsp </font></a></li>
+        <li><%= link_to "تسجيل حساب جديد ",  new_user_path%> </li>
         <li><a href="#"><font color="#7C7171">&nbsp&nbsp   الخدمات &nbsp&nbsp </font></a></li>
         <li><a href="#"><font color="#7C7171">&nbsp&nbsp   المساعدة &nbsp&nbsp </font></a></li>
       </ul>

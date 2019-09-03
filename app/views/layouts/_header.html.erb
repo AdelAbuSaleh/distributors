@@ -5,11 +5,59 @@
     </div>
     <div class="div_menu" id="menu">
       <ul>
-        <li><%= link_to "الرئيسية" ,root_path %> </li>
-        <li><a href="#"><font color="#7C7171">&nbsp&nbsp تسجيل الدخول  &nbsp&nbsp    </font></a></li>
-        <li><%= link_to "تسجيل حساب جديد ",  new_user_path%> </li>
-        <li><a href="#"><font color="#7C7171">&nbsp&nbsp   الخدمات &nbsp&nbsp </font></a></li>
-        <li><a href="#"><font color="#7C7171">&nbsp&nbsp   المساعدة &nbsp&nbsp </font></a></li>
+        <li><%= link_to "الرئيسية" ,root_path %> &nbsp&nbsp &nbsp&nbsp &nbsp&nbsp</li>
+                     <li><a href="#"><font color="#7C7171">&nbsp&nbsp   الخدمات &nbsp&nbsp </font></a></li>
+
+       <li><a href="#"><font color="#7C7171">&nbsp&nbsp   المساعدة &nbsp&nbsp </font></a></li>
+         <% if logged_in? && current_user.super_admin?  %>
+          <li><%= link_to "الموظفين", users_path %> &nbsp&nbsp &nbsp&nbsp </li>
+          <li><%= link_to "تسجيل حساب موظف جديد ",  new_user_path%> &nbsp&nbsp &nbsp&nbsp </li>
+          <li><%= link_to "أنشاء مركز جديد",  new_user_path%> &nbsp&nbsp &nbsp&nbsp </li>
+
+          
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              الاعدادات <b class="caret"></b>
+            </a>
+            &nbsp&nbsp &nbsp&nbsp
+          <li><%= link_to "الملف الشخصي", user_path(current_user.id)  %> &nbsp&nbsp &nbsp&nbsp </li>
+          <li><%= link_to "تحديث البيانات", edit_user_url(current_user.id) %> 
+          &nbsp&nbsp &nbsp&nbsp&nbsp</li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to "تسجيل الخروج", logout_path, method: "delete" %>
+          </li>
+      </ul>
+        </li>
+      <% elsif logged_in? && current_user.admin? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Account <b class="caret"></b>
+            </a>
+          <li><%= link_to "Profile", user_path(current_user.id)  %></li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to "Log out", logout_path, method: "delete" %>
+          </li>
+      </ul>
+        </li>
+
+       <% elsif logged_in? && current_user.employee? %>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Account <b class="caret"></b>
+            </a>
+          <li><%= link_to "Profile", user_path(current_user.id)  %></li>
+          <li class="divider"></li>
+          <li>
+            <%= link_to "Log out", logout_path, method: "delete" %>
+          </li>
+      </ul>
+        </li>
+      <% else %>
+        <li><%= link_to " تسجيل الدخول ", login_path %></li>
+      <% end %>
+
       </ul>
     </div> 
   </div>

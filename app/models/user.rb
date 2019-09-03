@@ -48,4 +48,21 @@ class User < ApplicationRecord
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##
   ## ---------------------- Methods ----------------------- ##
+  class << self
+    def login(email:, password:)
+      user = find_by(email: email.downcase)
+      return false if user.blank? || user.password_digest.nil?
+
+      user.authenticate(password) || false
+    end
+  end
+  # JWT payload
+  def login_payload
+    {
+      id: id,
+      user_name: user_name,
+      role: role,
+      email: email
+    }
+  end
 end

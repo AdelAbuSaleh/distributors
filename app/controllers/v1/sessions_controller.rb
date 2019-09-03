@@ -13,6 +13,7 @@ class V1::SessionsController < ApplicationController
   end
 
   def ensure_login(user)
+    debugger
     if user.present?
       data = { token: generate_token(user) }
       flash[:success] = 'Welcome to the Rahma-app!'

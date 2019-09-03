@@ -61,7 +61,12 @@ p {
 
 
 /* header */
-
+.header {
+  width: 100%;
+  height: 73px;
+  box-shadow: beige 8 7;
+  border-bottom: 1px solid #a9a5a9;
+}
 #logo {
   float: left;
   margin-right: 10px;

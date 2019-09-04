@@ -1,5 +1,6 @@
+# frozen_string_literal: true
+
 module V1::SessionsHelper
-  
   def log_in(data)
     session[:token] = data[:token]
   end

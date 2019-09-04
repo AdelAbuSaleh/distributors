@@ -1,5 +1,6 @@
-class V1::SessionsController < ApplicationController
+# frozen_string_literal: true
 
+class V1::SessionsController < ApplicationController
   def new; end
 
   def create

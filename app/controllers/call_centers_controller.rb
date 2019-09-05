@@ -71,7 +71,7 @@ class CallCentersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def call_center_params
     # params.fetch(:call_center, {})
-    params.permit(
+    params.require(:call_center).permit(
       :name,
       :address,
       :phone_numer,

@@ -6,13 +6,12 @@
     <div class="div_menu" id="menu">
       <ul>
         <li><%= link_to "الرئيسية" ,root_path %> &nbsp&nbsp </li>
-        <li><a href="#"><font color="#7C7171">&nbsp&nbsp الخدمات &nbsp&nbsp </font></a></li>
         <li><a href="#"><font color="#7C7171">&nbsp&nbsp   المساعدة &nbsp&nbsp </font></a></li>
 
         <% if logged_in? && current_user.super_admin?  %>
           <li><%= link_to "الموظفين", users_path %> &nbsp&nbsp &nbsp&nbsp </li>
           <li><%= link_to "تسجيل حساب موظف جديد ", new_user_path%> &nbsp&nbsp &nbsp&nbsp </li>
-          <li><%= link_to "أنشاء مركز جديد",  new_user_path%> &nbsp&nbsp &nbsp&nbsp </li>
+          <li><%= link_to "أنشاء مركز جديد",  new_call_center_path%> &nbsp&nbsp &nbsp&nbsp </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               الاعدادات  
@@ -43,6 +42,7 @@
         </li>
 
         <% elsif logged_in? && current_user.employee? %>
+          <li><a href="#"><font color="#7C7171">&nbsp&nbsp الخدمات &nbsp&nbsp </font></a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               الاعدادات  

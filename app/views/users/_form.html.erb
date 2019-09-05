@@ -1,82 +1,70 @@
-<%= form_with(model: @user, local: true) do |form| %>
-  <% if user.errors.any? %>
+  <% if @user.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
-      <% user.errors.full_messages.each do |message| %>
+      <% @user.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-<div class="form-row">
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault01">Full name</label>
-       <%= form.text_field :full_name, class: "form-control" ,style: 'float: left; width: 50%' %>
-    </div>
+      <div class="form-row">
+        <div class="col-md-4 mb-3">
+          <%= f.label :full_name %>
+          <%= f.text_field :full_name, class: "form-control" ,style: 'float: left; width: 50%' %>
+        </div>
 
-     <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> user_name </label>
-       <%= form.text_field :user_name, class: " required form-control",style: 'float: left; width: 50%'  %>
-    </div>
+        <div class="col-md-4 mb-3">
+          <%= f.label :user_name %>
+          <%= f.text_field :user_name, class: " required form-control",style: 'float: left; width: 50%'  %>
+        </div>
 
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> Email Address </label>
-       <%= form.text_field :email, class: " required form-control",style: 'float: left; width: 50%'  %>
-    </div>
-    </br> 
-    </br> 
-    </br> 
-    </br> 
-  <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> country_code </label>
-       <%= form.text_field :country_code, class: " required form-control",style: 'float: left; width: 50%'  %>
-    </div>
-  <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> mobile </label>
-       <%= form.text_field :mobile, class: " required form-control",style: 'float: left; width: 50%'  %>
-    </div>
+        <div class="col-md-4 mb-3">
+          <label for="validationDefault01"> Email Address </label>
+          <%= f.text_field :email, class: " required form-control",style: 'float: left; width: 50%'  %>
+        </div>
+          </br> </br> </br> </br> 
 
-  <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> status </label>
-       <%= form.select :status, User.status.options, class: " required form-control",style: 'float: left; width: 50%'  %>
-    </div>
-      </br>
-      </br>
-      </br>
-      </br>
-  
-  <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> role </label>
-       <%= form.select :role, User.role.options , class: " required form-control",style: 'float: left; width: 50%'  %>
-    </div>
+        <div class="col-md-4 mb-3">
+          <%= f.label :country_code %>
+          <%= f.text_field :country_code, class: " required form-control",style: 'float: left; width: 50%'  %>
+        </div>
 
-  <div class="col-md-4 mb-3">
-      <%= form.label :password %>
-      <%= form.password_field :password, class: " form-control",style: 'float: left; width: 50%'  %>
-    </div>
+        <div class="col-md-4 mb-3">
+          <%= f.label :mobile %>
+          <%= f.text_field :mobile, class: " required form-control",style: 'float: left; width: 50%'  %>
+        </div>
 
-  <div class="col-md-4 mb-3">
-      <%= form.label :password_confirmation, "Confirmation"  %>
-      <%= form.password_field :password_confirmation, class: "form-control",style: 'float: left; width: 50%'  %>
-    </div>
+        <div class="col-md-4 mb-3">
+          <%= f.label :status %>
+          <%= f.select :status, User.status.options, class: " required form-control",style: 'float: left; width: 50%'  %>
+        </div>
+          </br> </br> </br> </br>
 
+        <div class="col-md-4 mb-3">
+          <%= f.label :role %>
+          <%= f.select :role, User.role.options , class: " required form-control",style: 'float: left; width: 50%'  %>
+        </div>
 
-    </div>
+        <div class="col-md-4 mb-3">
+          <%= f.label :password %>
+          <%= f.password_field :password, class: " form-control",style: 'float: left; width: 50%'  %>
+        </div>
 
-     </br>
+        <div class="col-md-4 mb-3">
+          <%= f.label :password_confirmation, "Confirmation"  %>
+          <%= f.password_field :password_confirmation, class: "form-control",style: 'float: left; width: 50%'  %>
+        </div>
+
+      </div>
+
+     <%= f.collection_select :call_center_ids, EmployeesCallCenter.all, :call_center_id, :call_center_id ,{ prompt: "أختر المركز " }, multiple: true %>
+
       </br>
      </br>
      </br>
      </div>
    </br>
-     </br>
-          </br>
-     </br>
-</br>
-  <div class="actions">
-    <%= form.submit "Create my account" , class: "btn btn-primary"  %>
-  </div>
-<% end %>
+

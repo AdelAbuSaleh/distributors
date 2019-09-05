@@ -11,6 +11,52 @@
     </div>
   <% end %>
 
+<div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> name </label>
+       <%= form.text_field :name, class: "form-control" ,style: 'float: left; width: 50%' %>
+    </div>
+
+     <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> address </label>
+       <%= form.text_field :address, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> phone_numer </label>
+       <%= form.text_field :phone_numer, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+    </br> 
+    </br> 
+    </br> 
+    </br> 
+  <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> services </label>
+       <%= form.text_field :services, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+  <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> email </label>
+       <%= form.text_field :email, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+
+  <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> description </label>
+       <%= form.text_field :description, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+
+  <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> status </label>
+       <%= form.select :status, CallCenter.status.options, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+  
+
+     </br>
+      </br>
+     </br>
+     </br>
+     </div>
+   </br>
+
   <div class="actions">
     <%= form.submit %>
   </div>

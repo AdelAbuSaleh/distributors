@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @user = @user.employees_call_centers.build
   end
 
   # GET /users/1/edit
@@ -73,6 +74,6 @@ class UsersController < ApplicationController
   def user_params
     main_params = %i[full_name user_name email country_code mobile password password_confirmation role status]
     main_params.push(call_center_ids: []) if params[:role].eql?('employee')
-    params.require(:user).permit(main_params)
+    params.permit(main_params)
   end
 end

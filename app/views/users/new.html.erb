@@ -1,5 +1,14 @@
-<h1>New User</h1>
 
-<%= render 'form', user: @user %>
 
-<%= link_to 'Back', users_path %>
+
+<h1> Create new Account </h1>
+  <div>
+    <%= form_with url: users_path do |f| %>
+    <%= render 'form', f: f %> </br>
+
+    <%= f.submit "Create my account", class: "btn btn-primary" %>
+    <% end %>
+  </div> </br> </br>  </br> </br>   </br>  </br>  </br></br>
+
+
+  <%= link_to 'Back', users_path %>

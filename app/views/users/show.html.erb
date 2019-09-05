@@ -1,4 +1,15 @@
-<p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+<p><%= @user.role %></p>
+
+<p>
+  <strong>Full Name: </strong> <%= @user.full_name %><br />
+  <strong>Email :</strong> <%= @user.email %><br />
+  <strong>Role:</strong> <%= @user.role %><br />
+  <strong>Created Date:</strong> <%= @user.created_at %><br />
+</p>
+
+
+<hr />
+
+<%# <%= link_to 'Back', {:action => 'list'} %>
+

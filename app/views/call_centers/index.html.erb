@@ -1,9 +1,14 @@
 <p id="notice"><%= notice %></p>
 
-<h2> Call Centers </h2>
-<%= link_to 'New Call Center', new_call_center_path %>
+<div class="container">
+  <div class="page-header">
+    <h2> جميع المنشأت </h2>
+    <h4><span ><%= link_to 'New Call Center', new_call_center_path , class: 'btn btn-success'%></span></h4>
+  </div>
+</div>
 
-<table class="table">
+<div class="container">
+<table class="table table-striped">
   <thead>
     <tr>
       <th> Name </th>
@@ -37,5 +42,4 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
+</div>

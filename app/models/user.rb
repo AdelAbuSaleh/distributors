@@ -26,8 +26,9 @@ class User < ApplicationRecord
   ## ----------------------- Enums ------------------------ ##
   enumerize :role, in: {
     super_admin: 0,
-    employee: 1,
-    admin: 2
+    admin: 1,
+    employee: 2,
+    distributor: 3
   }, default: 1, scope: true, predicates: true
 
   # User statuses

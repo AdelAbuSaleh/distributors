@@ -1,15 +1,30 @@
 
-<p><%= @user.role %></p>
+<h2> بيانات الموظف </h2>
+<%= link_to 'Back', users_path %>
 
-<p>
-  <strong>Full Name: </strong> <%= @user.full_name %><br />
-  <strong>Email :</strong> <%= @user.email %><br />
-  <strong>Role:</strong> <%= @user.role %><br />
-  <strong>Created Date:</strong> <%= @user.created_at %><br />
-</p>
+<table class="table">
+  <thead>
+    <tr>
+      <th> Full Name </th>
+      <th> Email </th>
+      <th> Role </th>
+      <th> Created Date </th>
+      <th> Actions </th>
+    </tr>
+  </thead>
 
+  <tbody>
+      <tr>
+        <td><%= @user.full_name %></td>
+        <td><%= @user.email %></td>
+        <td><%= @user.role %></td>
+        <td><%= @user.created_at %></td>
+        <td> <%= link_to 'Edit', edit_user_path(@user) %></td>
+      </tr>
+  </tbody>
+</table>
 
-<hr />
+<br>
 
 <%# <%= link_to 'Back', {:action => 'list'} %>
 

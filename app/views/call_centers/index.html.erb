@@ -1,25 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Call Centers</h1>
+<h2> Call Centers </h2>
+<%= link_to 'New Call Center', new_call_center_path %>
 
-<table>
+<table class="table">
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th> Name </th>
+      <th> address </th>
+      <th> phone_numer </th>
+      <th> services </th>
+      <th> email </th>
+      <th> description </th>
+      <th> status </th>
+      <th> created_at </th>
+      <th> Actions </th>
     </tr>
   </thead>
 
   <tbody>
     <% @call_centers.each do |call_center| %>
       <tr>
-        <td><%= link_to 'Show', call_center %></td>
-        <td><%= link_to 'Edit', edit_call_center_path(call_center) %></td>
-        <td><%= link_to 'Destroy', call_center, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= call_center.name %></td>
+        <td><%= call_center.address %></td>
+        <td><%= call_center.phone_numer %></td>
+        <td><%= call_center.services %></td>
+        <td><%= call_center.email %></td>
+        <td><%= call_center.description %></td>
+        <td><%= call_center.status %></td>
+
+        <td><%= call_center.created_at %></td>
+        <td><%= link_to 'Show', call_center %>  <%= link_to 'Edit', edit_call_center_path(call_center) %>
+            <%= link_to 'Destroy', call_center, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Call Center', new_call_center_path %>

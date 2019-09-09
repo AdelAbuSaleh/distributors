@@ -26,10 +26,13 @@
         <td><%= user.role %></td>
         <td><%= user.created_at %></td>
         <td><%= link_to 'Show', user %>  <%= link_to 'Edit', edit_user_path(user) %>
+        <% if @users.present? && current_user.super_admin? %>
             <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
         </td>
       </tr>
     <% end %>
+
   </tbody>
 </table>
 </div>

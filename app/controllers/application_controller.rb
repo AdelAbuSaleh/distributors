@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   require_power_check
 
   before_action :validate_token!
-
+  attr_accessor :current_user, :current_organization
   # include ActionController::MimeResponds
 
   current_power do

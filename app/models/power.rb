@@ -44,26 +44,22 @@ class Power
   ######################## V1::UsersController #######################
 
   power :users_index, :users_show do
-    debugger
+    return User if super_admin?
     return @current_organization.users if admin?
 
     powerless!
   end
 
-  power :creatable_users do
-    return User unless admin?
+  power :creatable_users, :updatable_users do
+    return User if super_admin? || admin?
 
     powerless!
   end
 
-  power :creatable_users do
-    return User unless admin?
+  power :destroyable_users do
+    return User if super_admin?
 
-    powerless!
-  end
-
-  power :updatable_users do
-    powerless!
+    false
   end
 
 

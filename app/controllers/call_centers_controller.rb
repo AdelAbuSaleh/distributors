@@ -2,12 +2,19 @@
 
 class CallCentersController < ApplicationController
   before_action :set_call_center, only: %i[show edit update destroy]
-  power :call_centers
+  # power :call_centers
+  power :call_centers, map: {
+    [:index] => :call_centers_index,
+    [:show] => :call_centers_show,
+    %i[new create] => :creatable_call_centers,
+    %i[edit update] => :updatable_call_centers,
+    [:destroy] => :destroyable_call_centers
+  }, as: :call_centers_scope
 
   # GET /call_centers
   # GET /call_centers.json
   def index
-    @call_centers = CallCenter.all
+    @call_centers = call_centers_scope.all
   end
 
   # GET /call_centers/1

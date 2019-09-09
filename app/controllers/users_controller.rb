@@ -5,15 +5,15 @@ class UsersController < ApplicationController
   power :users, map: {
     [:index] => :users_index,
     [:show] => :users_show,
-    [:new, :create] => :creatable_users,
-    [:edit, :update] => :updatable_users,
+    %i[new create] => :creatable_users,
+    %i[edit update] => :updatable_users,
     [:destroy] => :destroyable_users
   }, as: :users_scope
 
   # GET /users
   # GET /users.json
   def index
-    @users = users_scope.order('id')#.page(params[:page]).per(5)
+    @users = users_scope.order('id') # .page(params[:page]).per(5)
   end
 
   # GET /users/1

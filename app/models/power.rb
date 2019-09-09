@@ -33,7 +33,6 @@ class Power
     true if role.eql?('employee')
   end
 
-
   # Generate powers for all tables and by default prevent them all from access
   ActiveRecord::Base.connection.tables.map(&:to_sym) - %i[schema_migrations ar_internal_metadata].each do |model|
     power model do
@@ -61,17 +60,35 @@ class Power
 
     false
   end
-
-
+  ######################## V1::sessionsController #######################
   power :sessions do
     true
   end
-
+  ######################## V1::static_pagesController #######################
   power :static_pages do
     true
   end
+  ######################## V1::call_centersController #######################
+  power :call_centers_index, :call_centers_show do
+    return CallCenter if super_admin?
+    return @current_organization if admin?
 
-  power :call_centers do
-    true
+    powerless!
+  end
+
+  power :creatable_call_centers do
+    # false
+
+    powerless!
+  end
+
+  power :updatable_call_centers do
+    return CallCenter if super_admin? || admin?
+
+    false
+  end
+
+  power :destroyable_call_centers do
+    powerless!
   end
 end

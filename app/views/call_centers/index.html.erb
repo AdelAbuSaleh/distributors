@@ -3,7 +3,6 @@
 <div class="container">
   <div class="page-header">
     <h2> جميع المنشأت </h2>
-    <h4><span ><%= link_to 'New Call Center', new_call_center_path , class: 'btn btn-success'%></span></h4>
   </div>
 </div>
 
@@ -36,7 +35,6 @@
 
         <td><%= call_center.created_at %></td>
         <td><%= link_to 'Show', call_center %>  <%= link_to 'Edit', edit_call_center_path(call_center) %>
-            <%= link_to 'Destroy', call_center, method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

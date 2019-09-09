@@ -11,14 +11,15 @@
         <% if logged_in? && current_user.super_admin?  %>
           <li><%= link_to "الموظفين", users_path %> &nbsp&nbsp &nbsp&nbsp </li>
           <li><%= link_to "تسجيل حساب موظف جديد ", new_user_path%> &nbsp&nbsp &nbsp&nbsp </li>
-          <li><%= link_to "أنشاء مركز جديد",  new_call_center_path%> &nbsp&nbsp &nbsp&nbsp </li>
+           <li><%= link_to "المنشأت", call_centers_path %> &nbsp&nbsp &nbsp&nbsp </li>
+          <li><%= link_to " تحديث بينات المنشأة ",  edit_call_center_url(@current_organization.id)%> &nbsp&nbsp &nbsp&nbsp </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               الاعدادات  
               <b class="caret"></b>
             </a> &nbsp&nbsp &nbsp&nbsp
           <li><%= link_to "الملف الشخصي", user_path(current_user.id)  %> &nbsp&nbsp &nbsp&nbsp </li>
-          <li><%= link_to "تحديث البيانات", edit_user_url(current_user.id) %> 
+          <li><%= link_to "تحديث الملف الشخصي", edit_user_url(current_user.id) %> 
           &nbsp&nbsp &nbsp&nbsp&nbsp </li>
           <li class="divider"></li>
           <li><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>

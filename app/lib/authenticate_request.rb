@@ -15,7 +15,8 @@ class AuthenticateRequest
   # Service entry point - return valid user object
   def call
     {
-      user: user
+      user: user,
+      orgnization_id: decoded_auth_token['orgnization_id']
       # access: decoded_auth_token[:access]
     }
   end

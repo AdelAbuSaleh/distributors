@@ -26,5 +26,6 @@ class ApplicationController < ActionController::Base
 
   def set_curret_user
     @current_user = @token[:user]
+    @current_organization = CallCenter.find(@token[:orgnization_id])
   end
 end

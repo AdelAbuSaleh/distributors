@@ -48,22 +48,22 @@ class User < ApplicationRecord
   validates :call_center_ids, presence: true, if: (->(e) { e.employee? || e.admin? })
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##
-  ## ---------------------- Methods ----------------------- ##
-  class << self
-    def login(email:, password:)
-      user = find_by(email: email.downcase)
-      return false if user.blank? || user.password_digest.nil?
+  def self.login(email:, slag:, password:)
+    call_center = CallCenter.find_by(slag: slag)
+    user = call_center.users.find_by(email: email.downcase)
+    return false unless call_center
+    return false if user.blank? || user.password_digest.nil?
+    return false unless user.authenticate(password)
 
-      user.authenticate(password) || false
-    end
+    user_and_orgnization(user, call_center)
   end
-  # JWT payload
-  def login_payload
+
+  def self.user_and_orgnization(user, orgnization)
     {
-      id: id,
-      user_name: user_name,
-      role: role,
-      email: email
+      user: user,
+      orgnization: orgnization
     }
   end
+
+  ## ---------------------- Methods ----------------------- ##
 end

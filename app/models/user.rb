@@ -49,11 +49,12 @@ class User < ApplicationRecord
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##
   def self.login(email:, slag:, password:)
+    return if email.blank? || slag.blank? || password.blank?
+
     call_center = CallCenter.find_by(slag: slag)
     user = call_center.users.find_by(email: email.downcase)
-    return false unless call_center
     return false if user.blank? || user.password_digest.nil?
-    return false unless user.authenticate(password)
+    return false unless user.authenticate(password) || call_center
 
     user_and_orgnization(user, call_center)
   end

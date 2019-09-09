@@ -2,6 +2,12 @@
 
 class UsersController < ApplicationController
   before_action :set_user, only: %i[show edit update destroy]
+  power :users, map: {
+    [:index] => :users_index,
+    [:show] => :users_show,
+    [:create] => :creatable_users,
+    [:update] => :updatable_users
+  }
 
   # GET /users
   # GET /users.json

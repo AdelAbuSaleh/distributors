@@ -4,16 +4,17 @@ class ApplicationController < ActionController::Base
   protect_from_forgery unless: -> { request.format.json? }
 
   include V1::SessionsHelper
+  include Consul::Controller
+
+  require_power_check
 
   before_action :validate_token!
 
   # include ActionController::MimeResponds
-  # include Consul::Controller
-  # require_power_check
 
-  # current_power do
-  #   Power.new(current_user)
-  # end
+  current_power do
+    Power.new(@current_user, @current_organization)
+  end
 
   def validate_token!
     return redirect_to root_url if session[:token].nil?

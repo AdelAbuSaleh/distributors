@@ -2,7 +2,7 @@
 
 class V1::SessionsController < ApplicationController
   skip_before_action :validate_token!
-
+  power :sessions
   def new; end
 
   def create

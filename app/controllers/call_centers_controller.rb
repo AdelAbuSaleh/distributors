@@ -2,6 +2,7 @@
 
 class CallCentersController < ApplicationController
   before_action :set_call_center, only: %i[show edit update destroy]
+  power :call_centers
 
   # GET /call_centers
   # GET /call_centers.json

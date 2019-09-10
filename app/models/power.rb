@@ -76,6 +76,7 @@ class Power
   end
 
   power :call_centers_show do
+    return CallCenter if super_admin?
     return @current_organization if admin?
 
     powerless!
@@ -89,6 +90,7 @@ class Power
 
   power :updatable_call_centers do
     return CallCenter if super_admin? #|| admin?
+    return @current_organization if admin?
 
     powerless!
   end

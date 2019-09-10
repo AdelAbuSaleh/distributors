@@ -11,6 +11,11 @@ module V1::SessionsHelper
     # @current_user ||= User.find_by(id: 1)
   end
 
+  # Returns the current logged-in user (if any).
+  def current_organization
+    @current_organization ||= CallCenter.find(decoded_auth_token['orgnization_id']) if decoded_auth_token
+  end
+
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
     !current_user.nil?

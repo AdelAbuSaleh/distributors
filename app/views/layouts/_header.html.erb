@@ -12,7 +12,7 @@
           <li><%= link_to "الموظفين", users_path %> &nbsp&nbsp &nbsp&nbsp </li>
           <li><%= link_to "تسجيل حساب موظف جديد ", new_user_path%> &nbsp&nbsp &nbsp&nbsp </li>
            <li><%= link_to "المنشأت", call_centers_path %> &nbsp&nbsp &nbsp&nbsp </li>
-          <li><%= link_to " تحديث بينات المنشأة ",  edit_call_center_url(@current_organization.id)%> &nbsp&nbsp &nbsp&nbsp </li>
+          <li><%= link_to " تحديث بينات المنشأة ",  edit_call_center_url(current_organization.id)%> &nbsp&nbsp &nbsp&nbsp </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               الاعدادات  

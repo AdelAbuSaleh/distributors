@@ -60,7 +60,7 @@
 
       </div>
 
-     <%= f.collection_select :call_center_ids, EmployeesCallCenter.all, :call_center_id, :call_center_id ,{ prompt: "أختر المركز " }, multiple: true %>
+     <%= f.collection_select :call_center_ids, CallCenter.all.uniq, :id, :id ,{ prompt: "أختر المركز " }, multiple: true %>
 
       </br>
      </br>

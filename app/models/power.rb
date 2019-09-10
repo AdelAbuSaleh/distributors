@@ -69,8 +69,13 @@ class Power
     true
   end
   ######################## V1::call_centersController #######################
-  power :call_centers_index, :call_centers_show do
+  power :call_centers_index do
     return CallCenter if super_admin?
+
+    powerless!
+  end
+
+  power :call_centers_show do
     return @current_organization if admin?
 
     powerless!
@@ -83,9 +88,9 @@ class Power
   end
 
   power :updatable_call_centers do
-    return CallCenter if super_admin? || admin?
+    return CallCenter if super_admin? #|| admin?
 
-    false
+    powerless!
   end
 
   power :destroyable_call_centers do

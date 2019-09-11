@@ -3,66 +3,81 @@
     <div style="float: left">
       <%= image_tag("hedar.jpg", alt: "Shao logo", width: '120') %>
     </div>
-    <div class="div_menu" id="menu">
-      <ul>
-        <li><%= link_to "الرئيسية" ,root_path %> &nbsp&nbsp </li>
-        <li><a href="#"><font color="#7C7171">&nbsp&nbsp   المساعدة &nbsp&nbsp </font></a></li>
-
-        <% if logged_in? && current_user.super_admin?  %>
-          <li><%= link_to "الموظفين", users_path %> &nbsp&nbsp &nbsp&nbsp </li>
-          <li><%= link_to "تسجيل حساب موظف جديد ", new_user_path%> &nbsp&nbsp &nbsp&nbsp </li>
-           <li><%= link_to "المنشأت", call_centers_path %> &nbsp&nbsp &nbsp&nbsp </li>
-          <li><%= link_to " تحديث بينات المنشأة ",  edit_call_center_url(current_organization.id)%> &nbsp&nbsp &nbsp&nbsp </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              الاعدادات  
-              <b class="caret"></b>
-            </a> &nbsp&nbsp &nbsp&nbsp
-          <li><%= link_to "الملف الشخصي", user_path(current_user.id)  %> &nbsp&nbsp &nbsp&nbsp </li>
-          <li><%= link_to "تحديث الملف الشخصي", edit_user_url(current_user.id) %> 
-          &nbsp&nbsp &nbsp&nbsp&nbsp </li>
-          <li class="divider"></li>
-          <li><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
-      </ul>
-        </li>
-
-        <% elsif logged_in? && current_user.admin? %>
-          <li><%= link_to "الموظفين", users_path %> &nbsp&nbsp &nbsp&nbsp </li>
-          <li><%= link_to "تسجيل حساب موظف جديد ", new_user_path%> &nbsp&nbsp &nbsp&nbsp </li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              الاعدادات  
-              <b class="caret"></b>
-            </a> &nbsp&nbsp &nbsp&nbsp
-          <li><%= link_to "الملف الشخصي", user_path(current_user.id)  %> &nbsp&nbsp &nbsp&nbsp </li>
-          <li><%= link_to "تحديث البيانات", edit_user_url(current_user.id) %> 
-          &nbsp&nbsp &nbsp&nbsp&nbsp </li>
-          <li class="divider"></li>
-          <li><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
-      </ul>
-        </li>
-
-        <% elsif logged_in? && current_user.employee? %>
-          <li><a href="#"><font color="#7C7171">&nbsp&nbsp الخدمات &nbsp&nbsp </font></a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              الاعدادات  
-              <b class="caret"></b>
-            </a> &nbsp&nbsp &nbsp&nbsp
-          <li><%= link_to "الملف الشخصي", user_path(current_user.id)  %> &nbsp&nbsp &nbsp&nbsp </li>
-          <li><%= link_to "تحديث البيانات", edit_user_url(current_user.id) %> 
-          &nbsp&nbsp &nbsp&nbsp&nbsp </li>
-          <li class="divider"></li>
-          <li><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
-          </ul>
-        </li>
+        <%if logged_in? && current_user.super_admin?  %>
+          <div class="nav-container">
+            <ul class="nav-items">
+              <li class="nav-item"><%= link_to "الرئيسية", "#" %></li>
+              <li class="nav-item"><%= link_to "الموظفين", users_path %></li>
+              <li class="nav-item"><%= link_to "التقارير", "#" %></li>
+              <li class="nav-item"><%= link_to "الخدمات", "#" %></li>
+              <li class="nav-item"><%= link_to "خدمات أخرى", "#" %></li>
+              <li class="nav-item"><%= link_to "المنشأت", call_centers_path%></li>
+              <li class="nav-item"><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
+              <!-- Dropdown menu -->
+              <li class="nav-item nav-item-dropdown">
+                <a class="dropdown-trigger" href="#">الاضافات</a>
+                <ul class="dropdown-menu">
+                  <li class="dropdown-menu-item">
+                    <%= link_to "تسجيل حساب موظف جديد", new_user_path %>
+                  </li>
+                  <li class="dropdown-menu-item">
+                    <li class="nav-item"><%= link_to "تحديث بينات المنشأة", edit_call_center_url(current_organization.id) %></li>
+                  </li>
+                  <li class="dropdown-menu-item">
+                    <li class="nav-item"><%= link_to "تحديث الملف الشخصي", edit_user_url(current_user.id) %></li>
+                  </li>
+                </ul>
+            </li>
+            </ul>
+            </div>
+          <% elsif logged_in? && current_user.admin? %>
+            <div class="nav-container">
+              <ul class="nav-items">
+                <li class="nav-item"><%= link_to "الرئيسية", "#" %></li>
+                <li class="nav-item"><%= link_to "الموظفين", users_path %></li>
+                <li class="nav-item"><%= link_to "التقارير", "#" %></li>
+                <li class="nav-item"><%= link_to "الخدمات", "#" %></li>
+                <li class="nav-item"><%= link_to "خدمات أخرى", "#" %></li>
+                <li class="nav-item"><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
         
-      <% else %>
-        <li><%= link_to " تسجيل الدخول ", login_path %></li>
-      <% end %>
-
-      </ul>
-    </div> 
+                <!-- Dropdown menu -->
+                <li class="nav-item nav-item-dropdown">
+                  <a class="dropdown-trigger" href="#">الاضافات</a>
+                    <ul class="dropdown-menu">
+                      <li class="dropdown-menu-item">
+                        <%= link_to "تسجيل حساب موظف جديد", new_user_path %>
+                      </li>
+                      <li class="dropdown-menu-item">
+                        <li class="nav-item"><%= link_to "تحديث الملف الشخصي", edit_user_url(current_user.id) %></li>
+                      </li>
+                      </ul>
+                     </li>
+                      </ul>
+              </div>
+            <% elsif logged_in? && current_user.employee? %>
+              <div class="nav-container">
+                <ul class="nav-items">
+                  <li class="nav-item"><%= link_to "الرئيسية", "#" %></li>
+                  <li class="nav-item"><%= link_to "سداد وباقات", "#" %></li>
+                  <li class="nav-item"><%= link_to "برمجة", "#"%></li>
+                  <li class="nav-item"><%= link_to "خدمات أخرى", "#" %></li>
+                   <li class="nav-item"><%= link_to "التقارير", "#" %></li>
+                    <li class="nav-item"><%= link_to "الرصيد", "#" %></li>
+                  <li class="nav-item"><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
+                
+                  </ul>
+                </div>
+        
+              <% else %>
+                <div class="nav-container">
+                  <ul class="nav-items">
+                    <li class="nav-item"><a href="#"> الرئيسية </a></li>
+                    <li class="nav-item"><a href="#"> من نحن </a></li>
+                    <li class="nav-item"><a href="#"> اتصل بنا </a></li>
+                    <li class="nav-item"><%= link_to "تسجيل الدخول", login_path %></li>
+                  </ul>
+                </div>
+                <% end %>
   </div>
   <br>
 </header>

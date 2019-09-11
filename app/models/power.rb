@@ -43,7 +43,7 @@ class Power
   ######################## V1::UsersController #######################
 
   power :users_index, :users_show do
-    return User if super_admin?
+    return User.all if super_admin?
     return @current_organization.users if admin?
 
     powerless!
@@ -70,7 +70,7 @@ class Power
   end
   ######################## V1::call_centersController #######################
   power :call_centers_index do
-    return CallCenter if super_admin?
+    return CallCenter.all if super_admin?
 
     powerless!
   end

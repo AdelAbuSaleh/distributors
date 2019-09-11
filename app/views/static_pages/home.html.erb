@@ -1,8 +1,13 @@
 <div class="center jumbotron" >
- <div class="container">
-    يرجى تسجيل الدخول لفتح الموقع 
-  </div>
- </br>
-
-
+  <% if logged_in? %>
+    <div class="container">
+      اهلا بك في موقع عادل  
+    </div>
+  <% else %>
+    <div class="container">
+      اهلا بك في موقع رحمة 
+      </br>
+      يرجى تسجيل الدخول لفتح الموقع 
+    </div>
+  <% end %>
 </div>

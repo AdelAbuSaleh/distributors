@@ -46,6 +46,7 @@ class User < ApplicationRecord
   validates :role, presence: true
   validates :status, presence: true
   validates :call_center_ids, presence: true, if: (->(e) { e.employee? || e.admin? })
+  validates :role, exclusion: { in: %w(super_admin admin), if: (-> { Current.user.admin? }) }
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##
   def self.login(email:, slag:, password:)

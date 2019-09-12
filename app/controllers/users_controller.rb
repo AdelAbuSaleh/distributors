@@ -79,7 +79,7 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     main_params = %i[full_name user_name email country_code mobile password password_confirmation role status]
-    main_params.push(call_center_ids: []) if params[:role].eql?('employee')
+    main_params.push(call_center_ids: []) if params[:role].eql?('employee') || params[:role].eql?('admin') 
     params.permit(main_params)
 
     # final_params = params.require(:user).permit(main_params)

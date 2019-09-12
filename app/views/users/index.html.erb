@@ -25,8 +25,9 @@
         <td><%= user.email %></td>
         <td><%= user.role %></td>
         <td><%= user.created_at %></td>
-        <td><%= link_to 'Show', user %>  <%= link_to 'Edit', edit_user_path(user) %>
+        <td><%= link_to 'Show', user %>
         <% if @users.present? && current_user.super_admin? %>
+            <%= link_to 'Edit', edit_user_path(user) %>
             <%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %>
             <% end %>
         </td>

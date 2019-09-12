@@ -49,10 +49,16 @@ class Power
     powerless!
   end
 
-  power :creatable_users, :updatable_users do
+  power :creatable_users do
     return User if super_admin? || admin?
 
     powerless!
+  end
+
+  power :updatable_users do
+    return User if super_admin?
+
+    false
   end
 
   power :destroyable_users do
@@ -71,13 +77,14 @@ class Power
   ######################## V1::call_centersController #######################
   power :call_centers_index do
     return CallCenter.all if super_admin?
+    return @current_user.call_centers if admin?
 
     powerless!
   end
 
   power :call_centers_show do
     return CallCenter if super_admin?
-    return @current_organization if admin?
+    return @current_user.call_centers if admin?
 
     powerless!
   end
@@ -90,7 +97,7 @@ class Power
 
   power :updatable_call_centers do
     return CallCenter if super_admin? #|| admin?
-    return @current_organization if admin?
+    # return @current_organization if admin?
 
     powerless!
   end

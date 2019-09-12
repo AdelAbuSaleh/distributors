@@ -43,16 +43,13 @@
                 <!-- Dropdown menu -->
                 <li class="nav-item nav-item-dropdown">
                   <a class="dropdown-trigger" href="#">الاضافات</a>
-                    <ul class="dropdown-menu">
-                      <li class="dropdown-menu-item">
-                        <%= link_to "تسجيل حساب موظف جديد", new_user_path %>
-                      </li>
-                      <li class="dropdown-menu-item">
-                        <li class="nav-item"><%= link_to "تحديث الملف الشخصي", edit_user_url(current_user.id) %></li>
-                      </li>
-                      </ul>
-                     </li>
-                      </ul>
+                  <ul class="dropdown-menu">
+                    <li class="dropdown-menu-item">
+                      <%= link_to "تسجيل حساب موظف جديد", new_user_path %>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
               </div>
             <% elsif logged_in? && current_user.employee? %>
               <div class="nav-container">

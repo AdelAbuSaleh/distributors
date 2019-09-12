@@ -35,7 +35,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     respond_to do |format|
-      # debugger
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }

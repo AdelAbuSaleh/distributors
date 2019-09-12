@@ -59,8 +59,8 @@
         </div>
 
       <div class="col-md-4 mb-3">
-          <%= f.label :name_call_center %>
-          <%= f.collection_select :call_center_ids, CallCenter.all.uniq, :name, :name ,{ prompt: "أختر المركز " }, multiple: true,
+          <%= f.label :call_center_ids %>
+          <%= f.collection_select :call_center_ids, CallCenter.all.uniq, :id, :name ,{ prompt: "أختر المركز " }, multiple: true,
            class: "form-control",style: 'float: left; width: 50%' %>
           <%# <%= f.password_field :password_confirmation, class: "form-control",style: 'float: left; width: 50%'  %>
         </div>

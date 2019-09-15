@@ -39,7 +39,7 @@ class UsersController < ApplicationController
         format.html { redirect_to @user, notice: 'User was successfully created.' }
         format.json { render json: @user, status: :created, location: @user }
       else
-        flash[:error] = 'Error adding equipment'
+        flash[:error] = 'Error adding user'
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
@@ -80,7 +80,7 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def user_params
     main_params = %i[full_name user_name email country_code mobile password password_confirmation role status]
-    main_params.push(call_center_ids: []) if params[:role].eql?('employee') || params[:role].eql?('admin')
+    main_params.push(call_center_ids: []) unless params[:role].eql?('super_admin')
     params.permit(main_params)
 
     # final_params = params.require(:user).permit(main_params)

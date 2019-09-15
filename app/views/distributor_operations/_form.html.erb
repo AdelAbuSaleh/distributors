@@ -1,0 +1,71 @@
+<%= form_with(model: distributor_operation, local: true) do |form| %>
+  <% if distributor_operation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(distributor_operation.errors.count, "error") %> prohibited this distributor_operation from being saved:</h2>
+
+      <ul>
+      <% distributor_operation.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<div class="form-row">
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> name </label>
+       <%= form.text_field :name, class: "form-control" ,style: 'float: left; width: 50%' %>
+    </div>
+        <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> user_id </label>
+       <%= form.text_field :user_id, class: "form-control" ,style: 'float: left; width: 50%' %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> call_center_id </label>
+       <%= form.text_field :call_center_id, class: "form-control" ,style: 'float: left; width: 50%' %>
+    </div>
+
+
+     <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> quantity </label>
+       <%= form.text_field :quantity, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> units_number </label>
+       <%= form.text_field :units_number, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+    </br> 
+    </br> 
+    </br> 
+    </br> 
+  <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> cost </label>
+       <%= form.text_field :cost, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+  <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> total </label>
+       <%= form.text_field :total, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+  <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> opration_date </label>
+       <%= form.text_field :opration_date, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+  <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> description </label>
+       <%= form.text_field :description, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+
+  <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> status </label>
+       <%= form.select :status, DistributorOperation.status.options, class: " required form-control",style: 'float: left; width: 50%'  %>
+    </div>
+  
+
+     </br>
+      </br>
+      </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

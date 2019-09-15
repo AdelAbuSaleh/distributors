@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Distributor Operations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @distributor_operations.each do |distributor_operation| %>
+      <tr>
+        <td><%= link_to 'Show', distributor_operation %></td>
+        <td><%= link_to 'Edit', edit_distributor_operation_path(distributor_operation) %></td>
+        <td><%= link_to 'Destroy', distributor_operation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Distributor Operation', new_distributor_operation_path %>

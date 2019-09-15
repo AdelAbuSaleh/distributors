@@ -14,6 +14,7 @@
 #  status      :integer          default("inactive"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  slag        :string           default(""), not null
 #
 
 class CallCenter < ApplicationRecord
@@ -30,6 +31,7 @@ class CallCenter < ApplicationRecord
   ## -------------------- Associations -------------------- ##
   has_many :employees_call_centers
   has_many :users, through: :employees_call_centers
+  has_many :distributor_operations
   ## -------------------- Validations --------------------- ##
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##

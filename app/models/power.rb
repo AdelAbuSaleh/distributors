@@ -96,13 +96,16 @@ class Power
   end
 
   power :updatable_call_centers do
-    return CallCenter if super_admin? #|| admin?
-    # return @current_organization if admin?
+    return CallCenter if super_admin?
 
     powerless!
   end
 
   power :destroyable_call_centers do
     powerless!
+  end
+
+  power :distributor_operations do
+    DistributorOperation
   end
 end

@@ -39,14 +39,16 @@ class User < ApplicationRecord
   ## -------------------- Associations -------------------- ##
   has_many :employees_call_centers
   has_many :call_centers, through: :employees_call_centers
-
+  has_many :distributor_operations, dependent: :destroy
   # accepts_nested_attributes_for :call_centers#, reject_if: :all_blank
   ## -------------------- Validations --------------------- ##
   # validates :role, :status, presence: true
   validates :role, presence: true
   validates :status, presence: true
   validates :call_center_ids, presence: true, if: (->(e) { e.employee? || e.admin? })
-  validates :role, exclusion: { in: %w(super_admin admin), if: (-> { Current.user.admin? }) }
+  validates :role, exclusion: { in: %w(super_admin admin), if: (-> { Current.user&.admin? }) }
+  # debugger
+  # validates :call_center_ids, inclusion: { in: Current.user.call_centers.ids }
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##
   def self.login(email:, slag:, password:)

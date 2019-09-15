@@ -64,6 +64,20 @@
                 
                   </ul>
                 </div>
+
+            <% elsif logged_in? && current_user.distributor? %>
+              <div class="nav-container">
+                <ul class="nav-items">
+                  <li class="nav-item"><%= link_to "الرئيسية", root_url %></li>
+                  <li class="nav-item"><%= link_to "عملية جديدة ", new_distributor_operation_url %></li>
+                  <li class="nav-item"><%= link_to "خدمات أخرى", "#" %></li>
+                  <li class="nav-item"><%= link_to "التقارير", "#" %></li>
+                  <li class="nav-item"><%= link_to "الرصيد", "#" %></li>
+                  <li class="nav-item"><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
+                
+                  </ul>
+                </div>
+        
         
               <% else %>
                 <div class="nav-container">

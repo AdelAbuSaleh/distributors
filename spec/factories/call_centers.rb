@@ -14,6 +14,7 @@
 #  status      :integer          default("inactive"), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
+#  slag        :string           default(""), not null
 #
 
 FactoryBot.define do

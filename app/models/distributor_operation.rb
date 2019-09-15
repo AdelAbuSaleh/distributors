@@ -39,7 +39,19 @@ class DistributorOperation < ApplicationRecord
   belongs_to :user
   belongs_to :call_center
   ## -------------------- Validations --------------------- ##
+  validates :user, presence: true
+  validates :call_center, presence: true
+  validates :operation_type, presence: true
+  validates :quantity, presence: true
+  validates :units_number, presence: true, if: (->(e) { e.mtn_credit? || e.spafon_credit? || e.yemen_mobile_credit? })
+  validates :opration_date, presence: true
+  validates :status, presence: true
+  validates :cost, presence: true
   ## --------------------- Callbacks ---------------------- ##
+  before_validation :set_total
   ## ------------------- Class Methods -------------------- ##
   ## ---------------------- Methods ----------------------- ##
+  def set_total
+    self.total = self.cost
+  end
 end

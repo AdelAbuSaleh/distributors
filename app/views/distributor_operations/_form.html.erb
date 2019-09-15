@@ -12,52 +12,57 @@
   <% end %>
 <div class="form-row">
     <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> name </label>
+      <label for="validationDefault01"> اسم العملية </label>
        <%= form.text_field :name, class: "form-control" ,style: 'float: left; width: 50%' %>
     </div>
-        <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> user_id </label>
-       <%= form.text_field :user_id, class: "form-control" ,style: 'float: left; width: 50%' %>
+      <%= form.hidden_field :user_id, value: current_user&.id %>
+
     </div>
 
     <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> call_center_id </label>
-       <%= form.text_field :call_center_id, class: "form-control" ,style: 'float: left; width: 50%' %>
+      <label for="validationDefault01"> الجهة المدينة </label>
+        <%= form.select :call_center_id, options_from_collection_for_select(current_user.call_centers.all, :id, :name), {}, { class: 'form-control' ,style: 'float: left; width: 50%' } %>
+    </div></br>
+
+  <div class="col-md-4 mb-3">
+      <label for="validationDefault01"> نوع العمليه </label>
+       <%= form.select :operation_type, DistributorOperation.operation_type.options, class: " required form-control",style: 'float: left; width: 50%'  %>
     </div>
-
-
      <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> quantity </label>
-       <%= form.text_field :quantity, class: " required form-control",style: 'float: left; width: 50%'  %>
+      <label for="validationDefault01"> الكمية </label>
+       <%= form.number_field:quantity, value: "1", class: 'number', min: 0, max: 99,style: 'float: left; width: 20%' %>
     </div>
 
+  <% if @distributor_operation.operation_type.eql?("mtn_credit") || @distributor_operation.operation_type.eql?("spafon_credit")  || @distributor_operation.operation_type.eql?("yemen_mobile_credit") %>
     <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> units_number </label>
+      <label for="validationDefault01"> عدد الوحدات  </label>
        <%= form.text_field :units_number, class: " required form-control",style: 'float: left; width: 50%'  %>
     </div>
+    <% end %>
     </br> 
     </br> 
     </br> 
     </br> 
   <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> cost </label>
+      <label for="validationDefault01"> الكلفة </label>
        <%= form.text_field :cost, class: " required form-control",style: 'float: left; width: 50%'  %>
     </div>
   <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> total </label>
+      <label for="validationDefault01"> المجموع </label>
        <%= form.text_field :total, class: " required form-control",style: 'float: left; width: 50%'  %>
     </div>
   <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> opration_date </label>
-       <%= form.text_field :opration_date, class: " required form-control",style: 'float: left; width: 50%'  %>
+      <label for="validationDefault01"> التاريخ </label>
+      <%= form.date_field :opration_date, as: :date, value: Date.today %>
+       <%# <%= form.text_field :opration_date, class: " required form-control",style: 'float: left; width: 50%'  %> 
     </div>
   <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> description </label>
+      <label for="validationDefault01"> الوصف </label>
        <%= form.text_field :description, class: " required form-control",style: 'float: left; width: 50%'  %>
     </div>
 
   <div class="col-md-4 mb-3">
-      <label for="validationDefault01"> status </label>
+      <label for="validationDefault01"> الحالة </label>
        <%= form.select :status, DistributorOperation.status.options, class: " required form-control",style: 'float: left; width: 50%'  %>
     </div>
   
@@ -65,7 +70,9 @@
      </br>
       </br>
       </div>
+        </br>
+      </br>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Create Operation", class: "btn btn-primary"  %>
   </div>
 <% end %>

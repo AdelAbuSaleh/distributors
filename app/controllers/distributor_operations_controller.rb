@@ -4,7 +4,7 @@ class DistributorOperationsController < ApplicationController
   # GET /distributor_operations
   # GET /distributor_operations.json
   def index
-    @distributor_operations = DistributorOperation.all
+    @distributor_operations = DistributorOperation.all.includes(:user, :call_center)
   end
 
   # GET /distributor_operations/1

@@ -38,6 +38,12 @@
       <label for="validationDefault01"> عدد الوحدات  </label>
        <%= form.text_field :units_number, class: " required form-control",style: 'float: left; width: 50%'  %>
     </div>
+
+    <% else %>
+       </div>
+      <%= form.hidden_field :units_number, value: nil %>
+
+    </div>
     <% end %>
     </br> 
     </br> 

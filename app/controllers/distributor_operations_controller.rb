@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class DistributorOperationsController < ApplicationController
-  before_action :set_distributor_operation, only: [:show, :edit, :update, :destroy]
+  before_action :set_distributor_operation, only: %i[show edit update destroy]
   power :distributor_operations
   # GET /distributor_operations
   # GET /distributor_operations.json
@@ -9,8 +11,7 @@ class DistributorOperationsController < ApplicationController
 
   # GET /distributor_operations/1
   # GET /distributor_operations/1.json
-  def show
-  end
+  def show; end
 
   # GET /distributor_operations/new
   def new
@@ -18,8 +19,7 @@ class DistributorOperationsController < ApplicationController
   end
 
   # GET /distributor_operations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /distributor_operations
   # POST /distributor_operations.json
@@ -61,26 +61,26 @@ class DistributorOperationsController < ApplicationController
     end
   end
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_distributor_operation
-      @distributor_operation = DistributorOperation.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_distributor_operation
+    @distributor_operation = DistributorOperation.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def distributor_operation_params
-      # params.fetch(:distributor_operation, {})
-      params.require(:distributor_operation).permit(
-        :user_id,
-        :call_center_id,
-        :name,
-        :operation_type,
-        :quantity,
-        :units_number,
-        :cost,
-        :total,
-        :description,
-        :opration_date,
-        :status
-      )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def distributor_operation_params
+    # params.fetch(:distributor_operation, {})
+    params.require(:distributor_operation).permit(
+      :user_id,
+      :call_center_id,
+      :name,
+      :operation_type,
+      :quantity,
+      :units_number,
+      :cost,
+      :total,
+      :description,
+      :opration_date,
+      :status
+    )
+  end
 end

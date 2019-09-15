@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: distributor_operations
@@ -52,6 +54,6 @@ class DistributorOperation < ApplicationRecord
   ## ------------------- Class Methods -------------------- ##
   ## ---------------------- Methods ----------------------- ##
   def set_total
-    self.total = self.cost
+    self.total = cost
   end
 end

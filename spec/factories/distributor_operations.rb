@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: distributor_operations
@@ -20,6 +22,5 @@
 
 FactoryBot.define do
   factory :distributor_operation do
-    
   end
 end

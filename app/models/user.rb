@@ -45,7 +45,7 @@ class User < ApplicationRecord
   # validates :role, :status, presence: true
   validates :role, presence: true
   validates :status, presence: true
-  validates :call_center_ids, presence: true, if: (->(e) { e.employee? || e.admin? || e.distributor? })
+  validates :call_center_ids, presence: true, unless: (->(e) { e.super_admin? })
   validates :role, exclusion: { in: %w[super_admin admin], if: (-> { Current.user&.admin? }) }
   # debugger
   # validates :call_center_ids, inclusion: { in: Current.user.call_centers.ids }

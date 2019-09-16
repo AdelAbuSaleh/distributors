@@ -1,5 +1,11 @@
-<h1> Distributor Operation</h1>
-
-<%= render 'form', distributor_operation: @distributor_operation %>
 
 <%= link_to 'Back', distributor_operations_path %>
+
+<h1> Distributor Operation</h1>
+
+<%= form_for(@distributor_operation, url: distributor_operations_path) do |form| %>
+<%= render 'form', form: form %>
+</br>
+
+<%= form.submit "Create my account", class: "btn btn-primary" %>
+<% end %>

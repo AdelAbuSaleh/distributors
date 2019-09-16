@@ -1,6 +1,6 @@
 <h1>Editing Distributor Operation</h1>
 
-<%= render 'form', distributor_operation: @distributor_operation %>
-
-<%= link_to 'Show', @distributor_operation %> |
-<%= link_to 'Back', distributor_operations_path %>
+<%= form_for(@distributor_operation, url: distributor_operation_path) do |form| %>
+<%= render 'form', form: form %>
+<%= form.submit "Save changes", class: "btn btn-primary" %>
+<% end %>

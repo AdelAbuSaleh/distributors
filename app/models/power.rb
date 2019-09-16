@@ -104,7 +104,7 @@ class Power
   power :destroyable_call_centers do
     powerless!
   end
-
+  ######################## V1::call_centersController #######################
   power :distributor_operations do
     DistributorOperation
   end

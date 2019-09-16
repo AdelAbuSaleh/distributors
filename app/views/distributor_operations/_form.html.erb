@@ -13,7 +13,8 @@
 <div class="form-row">
   <div class="col-md-4 mb-3">
     <label for="validationDefault01"> اسم العملية </label>
-    <%= form.text_field :name, class: "form-control" ,style: 'float: left; width: 50%' %>
+      <%= form.select :name, options_for_select(["شحن فوري ", "ايداع نقدي "]), {}, { class: 'form-control' ,style: 'float: left; width: 50%' } %>
+    <%# <%= form.text_field :name, class: "form-control" ,style: 'float: left; width: 50%' %> 
   </div>
 
   <div class="col-md-4 mb-3">

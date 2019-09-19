@@ -1,0 +1,50 @@
+
+
+<p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="page-header">
+    <h2> جميع العمليات </h2>
+  </div>
+</div>
+
+<div class="container">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th> اسم البائع </th>
+      <th> اسم الجهة المدينة </th>
+      <th> عدد العمليات المسددة  </th>
+      <th>  كمية  العمليات غير المسددة </th>
+      <th> مجموع العمليات غير المسددة  </th>
+      <th> عدد العمليات الغير مسددة  </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% if current_user.super_admin? %>
+       <% @distributor_operations.each do |distributor_operation| %>
+      <tr>
+        <td><%= distributor_operation.user.full_name %></td>
+        <td><%= distributor_operation.call_center.name %></td>
+        <td><%= distributor_operation.quantity %></td>
+        <td><%= distributor_operation.total %></td>
+        <td><%= distributor_operation.opration_date %></td>
+        <td><%= distributor_operation.status %></td>
+<%end%>
+      </tr>
+
+      <% else %>
+      <tr>
+        <td><%= @distributor_operations[:distributor_operations][:seller_name] %></td>
+        <td><%= @distributor_operations[:distributor_operations][:organization_name] %></td>
+        <td><%= @distributor_operations[:distributor_operations][:distributor_operations_whit_status_paid] %></td>
+        <td><%= @distributor_operations[:distributor_operations][:quantity_operations_not_paid] %></td>
+        <td><%= @distributor_operations[:distributor_operations][:total_operations_not_paid] %></td>
+        <td><%= @distributor_operations[:distributor_operations][:distributor_operations_whit_status_not_paid]%></td>
+
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+</div>
+<br>

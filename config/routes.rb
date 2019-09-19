@@ -16,4 +16,5 @@ Rails.application.routes.draw do
   end
   resources :call_centers
   resources :users
+  resources :dasbord
 end

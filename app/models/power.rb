@@ -108,4 +108,9 @@ class Power
   power :distributor_operations do
     DistributorOperation
   end
+
+
+  power :dasbords do
+    true
+  end
 end

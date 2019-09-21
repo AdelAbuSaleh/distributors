@@ -44,6 +44,7 @@ class DasbordDistributorOperations
   end
   ## ...... distributor_reprts ......##
   def distributor_reprts
+    operations = context.user.distributor_operations
     {
       organization_name: context.organization.name,
       quantity_operations_not_paid: operations.with_status(:not_paid).pluck(:quantity).sum,

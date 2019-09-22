@@ -11,6 +11,7 @@
               <li class="nav-item"><%= link_to "التقارير", dasbord_index_url %></li>
               <li class="nav-item"><%= link_to "الخدمات", "#" %></li>
               <li class="nav-item"><%= link_to "خدمات أخرى", "#" %></li>
+              <%= link_to "تسجيل حساب موظف جديد", new_call_center_url %>
               <li class="nav-item"><%= link_to "المنشأت", call_centers_path%></li>
               <li class="nav-item"><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
               <!-- Dropdown menu -->
@@ -58,7 +59,7 @@
                   <li class="nav-item"><%= link_to "سداد وباقات", "#" %></li>
                   <li class="nav-item"><%= link_to "برمجة", "#"%></li>
                   <li class="nav-item"><%= link_to "خدمات أخرى", "#" %></li>
-                   <li class="nav-item"><%= link_to "التقارير", "#" %></li>
+                   <li class="nav-item"><%= link_to "التقارير", dasbord_index_url %></li>
                     <li class="nav-item"><%= link_to "الرصيد", "#" %></li>
                   <li class="nav-item"><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
                 

@@ -51,25 +51,14 @@ class User < ApplicationRecord
   # validates :call_center_ids, inclusion: { in: Current.user.call_centers.ids }
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##
-  def self.login(email:, slag:, password:)
-    return if email.blank? || slag.blank? || password.blank?
-
-    call_center = CallCenter.find_by(slag: slag)
-    return if call_center.blank?
+  def self.login(email, password, call_center)
+    return if call_center.users.nil?
 
     user = call_center.users.find_by(email: email.downcase)
     return false if user.blank? || user.password_digest.nil?
-    return false unless user.authenticate(password) || call_center
+    return false unless user.authenticate(password)
 
-    user_and_orgnization(user, call_center)
+    { user: user, orgnaization: call_center }
   end
-
-  def self.user_and_orgnization(user, orgnization)
-    {
-      user: user,
-      orgnization: orgnization
-    }
-  end
-
   ## ---------------------- Methods ----------------------- ##
 end

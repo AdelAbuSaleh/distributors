@@ -2,7 +2,7 @@ class DasbordController < ApplicationController
   power :dasbords, as: :dasbords_scope
 
   def index
-    result = DasbordDistributorOperations.call(current_user: @current_user, current_organization: @current_organization)
+    result = DasbordDistributorOperations.call(user: @current_user, organization: @current_organization)
     if result.success?
       @distributor_operations = result.body
     else

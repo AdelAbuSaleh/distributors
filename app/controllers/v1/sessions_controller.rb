@@ -6,8 +6,11 @@ class V1::SessionsController < ApplicationController
   def new; end
 
   def create
-    user_and_orgnization = User.login login_params
-    ensure_login user_and_orgnization
+    call_center = CallCenter.find_by(slag: login_params[:slag])
+    return flash.now[:danger] = 'Invalid login' unless call_center
+
+    user_and_org = User.login(login_params[:email], login_params[:password], call_center)
+    ensure_login user_and_org
   end
 
   def destroy
@@ -35,7 +38,7 @@ class V1::SessionsController < ApplicationController
         user_name: user_and_orgnization[:user].user_name,
         role: user_and_orgnization[:user].role,
         email: user_and_orgnization[:user].email,
-        orgnization_id: user_and_orgnization[:orgnization].id
+        orgnization_id: user_and_orgnization[:orgnaization].id
       }
 
     JsonWebToken.encode(login_payload, 8.hours.from_now)

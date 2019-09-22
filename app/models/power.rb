@@ -90,7 +90,7 @@ class Power
   end
 
   power :creatable_call_centers do
-    # false
+    return CallCenter if super_admin?
 
     powerless!
   end

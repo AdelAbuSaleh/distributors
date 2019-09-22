@@ -109,7 +109,6 @@ class Power
     DistributorOperation
   end
 
-
   power :dasbords do
     true
   end

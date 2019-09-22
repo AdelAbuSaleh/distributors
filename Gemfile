@@ -13,6 +13,7 @@ gem 'coffee-rails', '~> 4.2'
 gem 'consul'
 gem 'dotenv-rails'
 gem 'enumerize'
+gem 'interactor'
 gem 'jbuilder', '~> 2.5'
 gem 'jwt'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -21,7 +22,6 @@ gem 'rails', '~> 5.2.3'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-gem "interactor"
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DasbordDistributorOperations
   include Interactor
   delegate :user, :body, to: :context
@@ -8,15 +10,15 @@ class DasbordDistributorOperations
   end
 
   def call
-    if context.user.role.eql?('super_admin')
-      context.body = super_admin_reports
-    elsif context.user.role.eql?('admin')
-      context.body = admin_reports
-    elsif context.user.role.eql?('distributor')
-      context.body = distributor_reports
-    else context.user.role.eql?('employee')
-      context.body = employee_reports
-    end
+    context.body = if context.user.role.eql?('super_admin')
+                     super_admin_reports
+                   elsif context.user.role.eql?('admin')
+                     admin_reports
+                   elsif context.user.role.eql?('distributor')
+                     distributor_reports
+                   else
+                     employee_reports
+                   end
   end
 
   def users_distributors

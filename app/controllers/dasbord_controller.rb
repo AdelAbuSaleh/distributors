@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class DasbordController < ApplicationController
   power :dasbords, as: :dasbords_scope
 

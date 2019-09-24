@@ -33,6 +33,10 @@ class Power
     true if role.eql?('employee')
   end
 
+  def distributor?
+    true if role.eql?('distributor')
+  end
+
   # Generate powers for all tables and by default prevent them all from access
   ActiveRecord::Base.connection.tables.map(&:to_sym) - %i[schema_migrations ar_internal_metadata].each do |model|
     power model do
@@ -110,6 +114,9 @@ class Power
   end
 
   power :dasbords do
-    true
+    return CallCenter if super_admin?
+    return @current_user.call_centers unless super_admin?
+
+    powerless!
   end
 end

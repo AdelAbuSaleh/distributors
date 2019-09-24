@@ -2,64 +2,55 @@
 
 class DasbordDistributorOperations
   include Interactor
-  delegate :user, :body, to: :context
+  delegate :user, :organization, :body, to: :context
 
   before do
-    context.users_distributors = users_distributors
-    return context.fail!(error: I18n.t('error')) unless context.user
+    context.organization = context.collection
+    # return context.fail!(error: I18n.t('error')) unless context.user
   end
 
   def call
-    context.body = if context.user.role.eql?('super_admin')
-                     super_admin_reports
-                   elsif context.user.role.eql?('admin')
-                     admin_reports
-                   elsif context.user.role.eql?('distributor')
-                     distributor_reports
-                   else
-                     employee_reports
-                   end
+    context.body = body
   end
 
-  def users_distributors
-    @users_distributors ||= User.where(role: 'distributor')
+  def distributor_operations(current_orgnaization)
+    current_orgnaization.distributor_operations
   end
 
-  ## ...... super_admin_reprts ......##
+  ## ...... quantity_operations_not_paid ......##
 
-  def super_admin_reports
-    # operations = @users_distributors.map(&:distributor_operations).flatten.uniq
-    operations = DistributorOperation.joins(:user).where(user_id: @users_distributors.ids)
-    body(operations)
+  def quantity_operations_not_paid(current_orgnaization)
+    current_orgnaization.distributor_operations.with_status(:not_paid).pluck(:quantity).sum
+    # operations = DistributorOperation.joins(:user).where(user_id: @users_distributors.ids)
+    # body(operations)
   end
-  ## ...... admin_reprts ......##
+  ## ...... total_operations_not_paid ......##
 
-  def admin_reports
-    operations = DistributorOperation.joins(:user).where(user_id: context.organization.users.ids)
-    body(operations)
+  def total_operations_not_paid(current_orgnaization)
+    current_orgnaization.distributor_operations.with_status(:not_paid).pluck(:total).sum
   end
-  ## ...... distributor_reprts ......##
+  ## ...... operations_whit_status_not_paid ......##
 
-  def distributor_reports
-    operations = context.user.distributor_operations
-    body(operations)
+  def operations_whit_status_not_paid(current_orgnaization)
+    current_orgnaization.distributor_operations.with_status(:not_paid).count
   end
 
-  ## ...... employee_reprts ......##
+  ## ...... operations_whit_status_paid ......##
 
-  def employee_reports
-    operations = DistributorOperation.joins(:user).where(user_id: context.organization.users.ids)
-    body(operations)
+  def operations_whit_status_paid(current_orgnaization)
+    current_orgnaization.distributor_operations.with_status(:was_repaid).count
   end
   ## ...... ....... ......##
 
-  def body(operations)
-    {
-      organization_name: context.organization.name,
-      quantity_operations_not_paid: operations.with_status(:not_paid).pluck(:quantity).sum,
-      total_operations_not_paid: operations.with_status(:not_paid).pluck(:total).sum,
-      distributor_operations_whit_status_not_paid: operations.with_status(:not_paid).count,
-      distributor_operations_whit_status_paid: operations.with_status(:was_repaid).count
-    }
+  def body
+    organization.all.map do |current_orgnaization|
+      {
+        organization_name: current_orgnaization.name,
+        quantity_operations_not_paid: quantity_operations_not_paid(current_orgnaization),
+        total_operations_not_paid: total_operations_not_paid(current_orgnaization),
+        distributor_operations_whit_status_not_paid: operations_whit_status_not_paid(current_orgnaization),
+        distributor_operations_whit_status_paid: operations_whit_status_paid(current_orgnaization)
+      }
+    end
   end
 end

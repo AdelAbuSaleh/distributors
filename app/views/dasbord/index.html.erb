@@ -20,15 +20,17 @@
   </thead>
 
   <tbody>
+    <% @distributor_operations.each do |distributor_operation| %>
 
       <tr>
-        <td><%= @distributor_operations[:organization_name] %></td>
-        <td><%= @distributor_operations[:distributor_operations_whit_status_paid] %></td>
-        <td><%= @distributor_operations[:distributor_operations_whit_status_not_paid]%></td>
-        <td><%= @distributor_operations[:quantity_operations_not_paid] %></td>
-        <td><%= @distributor_operations[:total_operations_not_paid] %></td>
+        <td><%= distributor_operation[:organization_name] %></td>
+        <td><%= distributor_operation[:distributor_operations_whit_status_paid] %></td>
+        <td><%= distributor_operation[:distributor_operations_whit_status_not_paid]%></td>
+        <td><%= distributor_operation[:quantity_operations_not_paid] %></td>
+        <td><%= distributor_operation[:total_operations_not_paid] %></td>
 
       </tr>
+      <% end %>
   </tbody>
 </table>
 </div>

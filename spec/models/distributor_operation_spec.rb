@@ -5,8 +5,6 @@
 # Table name: distributor_operations
 #
 #  id             :bigint           not null, primary key
-#  user_id        :bigint           not null
-#  call_center_id :bigint           not null
 #  name           :string
 #  operation_type :integer          not null
 #  quantity       :integer          not null
@@ -18,6 +16,7 @@
 #  status         :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  invoice_id     :bigint
 #
 
 require 'rails_helper'

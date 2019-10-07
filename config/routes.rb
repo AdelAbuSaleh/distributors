@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  resources :invoices
   resources :distributor_operations
   root 'static_pages#home'
 
@@ -17,4 +18,5 @@ Rails.application.routes.draw do
   resources :call_centers
   resources :users
   resources :dasbord
+  resources :invoices
 end

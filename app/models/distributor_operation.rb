@@ -5,8 +5,6 @@
 # Table name: distributor_operations
 #
 #  id             :bigint           not null, primary key
-#  user_id        :bigint           not null
-#  call_center_id :bigint           not null
 #  name           :string
 #  operation_type :integer          not null
 #  quantity       :integer          not null
@@ -18,6 +16,7 @@
 #  status         :integer          not null
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
+#  invoice_id     :bigint
 #
 
 class DistributorOperation < ApplicationRecord
@@ -38,11 +37,12 @@ class DistributorOperation < ApplicationRecord
     not_paid: 1
   }, default: 1, scope: true, predicates: true
   ## -------------------- Associations -------------------- ##
-  belongs_to :user
-  belongs_to :call_center
+  # belongs_to :user
+  # belongs_to :call_center
+  belongs_to :invoice
   ## -------------------- Validations --------------------- ##
-  validates :user, presence: true
-  validates :call_center, presence: true
+  # validates :user, presence: true
+  # validates :call_center, presence: true
   validates :operation_type, presence: true
   validates :quantity, presence: true
   validates :units_number, presence: true, if: (->(e) { e.mtn_credit? || e.spafon_credit? || e.yemen_mobile_credit? })

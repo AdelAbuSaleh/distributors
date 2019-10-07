@@ -39,7 +39,8 @@ class User < ApplicationRecord
   ## -------------------- Associations -------------------- ##
   has_many :employees_call_centers
   has_many :call_centers, through: :employees_call_centers
-  has_many :distributor_operations, dependent: :destroy
+  # has_many :distributor_operations, dependent: :destroy
+  has_many :invoices, dependent: :destroy
   # accepts_nested_attributes_for :call_centers#, reject_if: :all_blank
   ## -------------------- Validations --------------------- ##
   # validates :role, :status, presence: true

@@ -18,8 +18,8 @@
   </div>
 
   <div class="col-md-4 mb-3">
-    <label for="validationDefault01"> الجهة المدينة </label>
-    <%= form.select :call_center_id, options_from_collection_for_select(current_user.call_centers.all, :id, :name), {}, { class: 'form-control' ,style: 'float: left; width: 50%' } %>
+    <label for="validationDefault01"> فاتورة رقم </label>
+    <%= form.select :invoice_id, options_from_collection_for_select(current_organization.invoices, :id, :ref), {}, { class: 'form-control' ,style: 'float: left; width: 50%' } %>
   </div></br>
 
   <div class="col-md-4 mb-3">
@@ -64,9 +64,6 @@
       <%= form.select :status, DistributorOperation.status.options, class: " required form-control",style: 'float: left; width: 50%'  %>
   </div>
 
-  <div>
-    <%= form.hidden_field :user_id, value: current_user&.id %>
-  </div>
   <div class="col-md-4 mb-3">
     <%= form.hidden_field :total %>
   </div></br> 

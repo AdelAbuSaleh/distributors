@@ -6,7 +6,7 @@ class DistributorOperationsController < ApplicationController
   # GET /distributor_operations
   # GET /distributor_operations.json
   def index
-    @distributor_operations = DistributorOperation.all.includes(:user, :call_center)
+    @distributor_operations = DistributorOperation.all#.includes(:call_center)
   end
 
   # GET /distributor_operations/1
@@ -70,8 +70,7 @@ class DistributorOperationsController < ApplicationController
   def distributor_operation_params
     # params.fetch(:distributor_operation, {})
     params.require(:distributor_operation).permit(
-      :user_id,
-      :call_center_id,
+      :invoice_id,
       :name,
       :operation_type,
       :quantity,

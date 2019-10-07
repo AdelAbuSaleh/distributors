@@ -1,0 +1,58 @@
+  <% if @invoice.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@invoice.errors.count, "error") %> prohibited this invoice from being saved:</h2>
+
+      <ul>
+      <% @invoice.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+  <div class="row">
+    <div class="col-md-6">
+      <label > المرجع </label>
+      <%= form.text_field :ref, class: " required form-control"  %>
+    </div>
+    <div class="col-md-6">
+      <label > الخصم </label>
+      <%= form.text_field :discount, class: " required form-control"  %>
+    </div>
+    <div class="col-md-6">
+      <label > الجهة المدينة </label>
+      <%= form.select :call_center_id, options_from_collection_for_select(current_user.call_centers.all, :id, :name), {}, { class: 'form-control' ,style: 'float: left; width: 50%' }  %>
+    </div>
+    <div class="col-md-6">
+      <label > المبلغ المسدد </label>
+      <%= form.text_field :amount_paid, class: " required form-control"  %>
+    </div>
+    <div class="col-md-6">
+      <label > المبلغ الغير مسدد </label>
+      <%= form.text_field :amount_not_paid, class: " required form-control"  %>
+    </div>
+    <div class="col-md-6">
+      <label > المجموع </label>
+      <%= form.text_field :total, class: " required form-control"  %>
+    </div>
+    <div class="col-md-6">
+      <label > المتبقي من فاتورة سابقة </label>
+      <%= form.text_field :remaining_from_previous_invoice, class: " required form-control"  %>
+    </div>
+    <div class="col-md-6">
+      <label >التاريخ </label>
+      <%= form.date_field :invoices_date, as: :date, value: Date.today %>
+    </div>
+      <div class="col-md-6">
+      <label > الوقت </label>
+      <%= form.time_field :invoices_time, as: :time, value: Time.now %>
+    </div>
+    <div class="col-md-6">
+      <label >الوصف </label>
+      <%= form.text_area :description, class: " required form-control"  %>
+    </div>
+      <div>
+    <%= form.hidden_field :user_id, value: current_user&.id %>
+  </div>
+  </div>

@@ -37,15 +37,14 @@ class DistributorOperation < ApplicationRecord
     not_paid: 1
   }, default: 1, scope: true, predicates: true
   ## -------------------- Associations -------------------- ##
-  # belongs_to :user
-  # belongs_to :call_center
-  belongs_to :invoice
+  belongs_to :user
+  belongs_to :call_center
   ## -------------------- Validations --------------------- ##
   # validates :user, presence: true
   # validates :call_center, presence: true
   validates :operation_type, presence: true
   validates :quantity, presence: true
-  validates :units_number, presence: true, if: (->(e) { e.mtn_credit? || e.spafon_credit? || e.yemen_mobile_credit? })
+  validates :units_number, presence: true, unless: (->(e) { e.cash_deposit? })
   validates :opration_date, presence: true
   validates :status, presence: true
   validates :cost, presence: true

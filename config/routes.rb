@@ -18,5 +18,4 @@ Rails.application.routes.draw do
   resources :call_centers
   resources :users
   resources :dasbord
-  resources :invoices
 end

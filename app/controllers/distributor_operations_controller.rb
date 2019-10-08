@@ -68,9 +68,9 @@ class DistributorOperationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def distributor_operation_params
-    # params.fetch(:distributor_operation, {})
     params.require(:distributor_operation).permit(
-      :invoice_id,
+      :user_id,
+      :call_center_id,
       :name,
       :operation_type,
       :quantity,

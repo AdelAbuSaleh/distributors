@@ -31,8 +31,7 @@ class CallCenter < ApplicationRecord
   ## -------------------- Associations -------------------- ##
   has_many :employees_call_centers
   has_many :users, through: :employees_call_centers
-  # has_many :distributor_operations # , through: :users
-  has_many :invoices # , through: :users
+  has_many :distributor_operations # , through: :users
   ## -------------------- Validations --------------------- ##
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##

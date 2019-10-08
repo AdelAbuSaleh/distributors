@@ -119,9 +119,4 @@ class Power
 
     powerless!
   end
-
-  ######################## V1::call_centersController #######################
-  power :invoices do
-    Invoice
-  end
 end

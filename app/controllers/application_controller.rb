@@ -19,10 +19,10 @@ class ApplicationController < ActionController::Base
   def validate_token!
     return redirect_to root_url if session[:token].nil?
 
-    @token = AuthenticateRequest.get(User, session[:token])
+    @token = AuthenticateRequest.get(session[:token])
     flash[:error] = 'Invalid Authorization!' unless @token[:user]
     redirect_to(root_url) && return if @token[:user].nil?
-    set_curret_user_with_access
+    # set_curret_user_with_access
   end
 
   def set_curret_user_with_access

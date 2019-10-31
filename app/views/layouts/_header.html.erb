@@ -7,25 +7,25 @@
           <div class="nav-container">
             <ul class="nav-items">
               <li class="nav-item"><%= link_to "الرئيسية", "#" %></li>
-              <li class="nav-item"><%= link_to "الموظفين", users_path %></li>
+              <li class="nav-item"><%= link_to "الموظفين", v1_users_path %></li>
               <li class="nav-item"><%= link_to "التقارير", dasbord_index_url %></li>
               <li class="nav-item"><%= link_to "الخدمات", "#" %></li>
               <li class="nav-item"><%= link_to "خدمات أخرى", "#" %></li>
-              <%= link_to "تسجيل حساب موظف جديد", new_call_center_url %>
-              <li class="nav-item"><%= link_to "المنشأت", call_centers_path%></li>
+              <%= link_to "تسجيل حساب موظف جديد", new_v1_request_url %>
+              <li class="nav-item"><%= link_to "المنشأت", new_v1_request_url%></li>
               <li class="nav-item"><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
               <!-- Dropdown menu -->
               <li class="nav-item nav-item-dropdown">
                 <a class="dropdown-trigger" href="#">الاضافات</a>
                 <ul class="dropdown-menu">
                   <li class="dropdown-menu-item">
-                    <%= link_to "تسجيل حساب موظف جديد", new_user_path %>
+                    <%= link_to "تسجيل حساب موظف جديد", new_v1_request_url %>
                   </li>
                   <li class="dropdown-menu-item">
-                    <li class="nav-item"><%= link_to "تحديث بينات المنشأة", edit_call_center_url(current_organization.id) %></li>
+                    <%# <li class="nav-item"><%= link_to "تحديث بينات المنشأة", new_v1_request_url(current_organization.id) %></li> %>
                   </li>
                   <li class="dropdown-menu-item">
-                    <li class="nav-item"><%= link_to "تحديث الملف الشخصي", edit_user_url(current_user.id) %></li>
+                    <li class="nav-item"><%= link_to "تحديث الملف الشخصي", new_v1_request_url(current_user.id) %></li>
                   </li>
                 </ul>
             </li>
@@ -35,7 +35,7 @@
             <div class="nav-container">
               <ul class="nav-items">
                 <li class="nav-item"><%= link_to "الرئيسية", "#" %></li>
-                <li class="nav-item"><%= link_to "الموظفين", users_path %></li>
+                <li class="nav-item"><%= link_to "الموظفين", new_v1_request_url %></li>
                 <li class="nav-item"><%= link_to "التقارير", dasbord_index_url %></li>
                 <li class="nav-item"><%= link_to "الخدمات", "#" %></li>
                 <li class="nav-item"><%= link_to "خدمات أخرى", "#" %></li>
@@ -46,7 +46,7 @@
                   <a class="dropdown-trigger" href="#">الاضافات</a>
                   <ul class="dropdown-menu">
                     <li class="dropdown-menu-item">
-                      <%= link_to "تسجيل حساب موظف جديد", new_user_path %>
+                      <%= link_to "تسجيل حساب موظف جديد", new_v1_request_url %>
                     </li>
                   </ul>
                 </li>

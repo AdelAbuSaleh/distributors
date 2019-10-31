@@ -1,29 +1,30 @@
 # frozen_string_literal: true
 
+# Authinticat Users
 module V1::SessionsHelper
-  def log_in(data)
+  def authorization(data)
     session[:token] = data[:token]
   end
 
   # Returns the current logged-in user (if any).
   def current_user
-    @current_user ||= User.find(decoded_auth_token['id']) if decoded_auth_token
-    # @current_user ||= User.find_by(id: 1)
+    @current_user = @token[:user] if valid_token?
   end
 
   # Returns the current logged-in user (if any).
   def current_organization
-    @current_organization ||= CallCenter.find(decoded_auth_token['orgnization_id']) if decoded_auth_token
+    @current_organization = @token[:user] if valid_token?
   end
 
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
+    debugger
     !current_user.nil?
   end
 
   # decode authentication token
-  def decoded_auth_token
-    @decoded_auth_token ||= JsonWebToken.decode(session[:token])
+  def valid_token?
+    @token ||= AuthenticateRequest.get(session[:token])
   end
 
   # Logs out the current user.

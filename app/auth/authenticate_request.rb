@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class AuthenticateUser
+class AuthenticateRequest
   attr_reader :token
 
   def self.get(token = {})
@@ -16,18 +16,18 @@ class AuthenticateUser
   def call
     {
       user: user,
-      email: decoded_auth_token[:email],
-      orgnaization_id: decoded_auth_token[:orgnaization_id],
-      slug: decoded_auth_token[:slug]
+      email: decoded_auth_token['email'],
+      orgnaization_id: decoded_auth_token['orgnaization_id'],
+      slug: decoded_auth_token['slug']
     }
   end
 
   private
 
   def user
-    return @user ||= User.find(decoded_auth_token[:id]) if decoded_user?
+    return @user ||= User.find(decoded_auth_token['id']) if decoded_user?
 
-    @provider ||= Provider.find(decoded_auth_token[:id]) if decoded_provider?
+    @provider ||= Provider.find(decoded_auth_token['id']) if decoded_provider?
 
     # handle user not found
   rescue ActiveRecord::RecordNotFound
@@ -41,11 +41,11 @@ class AuthenticateUser
   end
 
   def decoded_user?
-    decoded_auth_token && decoded_auth_token[:slug].present?
+    decoded_auth_token && decoded_auth_token['slug'].present?
   end
 
   def decoded_provider?
-    decoded_auth_token && decoded_auth_token[:slug].nil?
+    decoded_auth_token && decoded_auth_token['slug'].nil?
   end
 
   # check for auth_token in `Authorization` header

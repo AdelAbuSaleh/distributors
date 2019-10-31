@@ -8,7 +8,6 @@ class V1::SessionsController < ApplicationController
 
   def create
     # return flash.now[:danger] = 'Missing params' if missing_params!(:email, :password)
-    debugger
     user = VerifyLogin.login(login_params)
     # return render_bad_request(message: I18n.t('errors.sessions.1303')) unless user
     # return flash.now[:danger] = 'Invalid login' unless user
@@ -24,9 +23,9 @@ class V1::SessionsController < ApplicationController
 
   def ensure_login(user)
     if user.present?
-      data = { token: generate_token(user) }
+      data = { user: user, orgnaization: user.try(:orgnaization), token: generate_token(user) }
       flash[:success] = 'Welcome to the Rahma-app!'
-      log_in data
+      authorization(data)
       redirect_to root_url
     else
       flash.now[:danger] = 'Invalid email/password combination'
@@ -49,6 +48,6 @@ class V1::SessionsController < ApplicationController
 
   # Whitelist parameters
   def login_params
-    params.permit(:email, :slug, :password) # .to_h.symbolize_keys
+    params.require(:session).permit(:email, :slug, :password)#.to_h.symbolize_keys
   end
 end

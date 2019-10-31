@@ -3,15 +3,19 @@
 class Power
   include Consul::Power
 
-  # attr_reader :current_user
-
-  def initialize(current_user, current_organization)
+  def initialize(current_user, current_orgnaization)
     @current_user = current_user
-    @current_organization = current_organization
+    @current_orgnaization = current_orgnaization
   end
 
   def user?
     @current_user.present?
+  end
+
+  def provider?
+    return unless @current_user.try(:orgnaization).nil?
+
+    @current_user
   end
 
   # get the role form current users
@@ -46,15 +50,22 @@ class Power
 
   ######################## V1::UsersController #######################
 
-  power :users_index, :users_show do
+  power :users_index do
     return User.all if super_admin?
-    return @current_organization.users if admin?
+    return @current_orgnaization.users if admin?
+
+    powerless!
+  end
+
+  power :users_show do
+    return User if super_admin?
+    return @current_orgnaization.users if admin?
 
     powerless!
   end
 
   power :creatable_users do
-    return User if super_admin? || admin?
+    return User #if provider?# if super_admin? # || admin? 
 
     powerless!
   end
@@ -62,61 +73,116 @@ class Power
   power :updatable_users do
     return User if super_admin?
 
-    false
+    powerless!
   end
 
   power :destroyable_users do
     return User if super_admin?
 
-    false
+    powerless!
   end
-  ######################## V1::sessionsController #######################
+
+  ######################## V1::OrgnaizationsController #######################
+
+  power :orgnaizations_index do
+    return Orgnaization.all if super_admin?
+    return @current_user.orgnaizations if admin?
+
+    powerless!
+  end
+
+  power :orgnaizations_show do
+    return Orgnaization.all if super_admin?
+    return @current_user.orgnaizations if admin?
+
+    powerless!
+  end
+
+  power :creatable_orgnaizations do
+    return Orgnaization # if super_admin?
+
+    powerless!
+  end
+
+  power :updatable_orgnaizations do
+    return Orgnaization if super_admin?
+
+    powerless!
+  end
+
+  power :destroyable_orgnaizations do
+    powerless!
+  end
+
+  ######################## V1::SessionsController #######################
+
   power :sessions do
     true
   end
-  ######################## V1::static_pagesController #######################
-  power :static_pages do
-    true
-  end
-  ######################## V1::call_centersController #######################
-  power :call_centers_index do
-    return CallCenter.all if super_admin?
-    return @current_user.call_centers if admin?
 
-    powerless!
+  ######################## V1::RequestController #######################
+
+  power :requests_index do
+    Request
   end
 
-  power :call_centers_show do
-    return CallCenter if super_admin?
-    return @current_user.call_centers if admin?
-
-    powerless!
+  power :request_show do
+    Request
   end
 
-  power :creatable_call_centers do
-    return CallCenter if super_admin?
-
-    powerless!
+  power :creatable_request do
+    Request
   end
 
-  power :updatable_call_centers do
-    return CallCenter if super_admin?
-
-    powerless!
+  power :updatable_request do
+    Request
   end
 
-  power :destroyable_call_centers do
-    powerless!
-  end
-  ######################## V1::call_centersController #######################
-  power :distributor_operations do
-    DistributorOperation
+  power :destroyable_request do
+    Request
   end
 
-  power :dasbords do
-    return CallCenter if super_admin?
-    return @current_user.call_centers unless super_admin?
+  ######################## V1::ProviderOperationsController #######################
 
-    powerless!
+  power :provider_operations_index do
+    ProviderOperation
+  end
+
+  power :provider_operations_show do
+    ProviderOperation
+  end
+
+  power :creatable_provider_operations do
+    ProviderOperation
+  end
+
+  power :updatable_provider_operations do
+    ProviderOperation
+  end
+
+  power :destroyable_provider_operations do
+    ProviderOperation
+  end
+
+  ######################## V1::ProvidersController #######################
+
+  power :providers_index do
+    Provider
+  end
+
+  power :providers_show do
+    Provider
+  end
+
+  power :creatable_providers do
+    Provider
+  end
+
+  power :updatable_providers do
+    Provider
+  end
+
+  power :destroyable_providers do
+    Provider
   end
 end

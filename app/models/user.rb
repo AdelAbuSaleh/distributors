@@ -1,34 +1,34 @@
-# frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: users
 #
 #  id              :bigint           not null, primary key
 #  full_name       :string
-#  user_name       :string
 #  email           :string
-#  country_code    :integer
+#  city            :string
+#  region          :string
+#  code_country    :integer          default(967)
 #  mobile          :string
 #  password_digest :string
 #  role            :integer
 #  status          :integer
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  orgnaization_id :bigint
 #
 
 class User < ApplicationRecord
   ## -------------------- Requirements -------------------- ##
   has_secure_password
   extend Enumerize
+  # include UserPresenter
   ## ----------------------- Scopes ----------------------- ##
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##
   enumerize :role, in: {
     super_admin: 0,
     admin: 1,
-    employee: 2,
-    distributor: 3
+    employee: 2
   }, default: 1, scope: true, predicates: true
 
   # User statuses
@@ -37,28 +37,16 @@ class User < ApplicationRecord
     inactive: 1
   }, default: 1, scope: true, predicates: true
   ## -------------------- Associations -------------------- ##
-  has_many :employees_call_centers
-  has_many :call_centers, through: :employees_call_centers
-  has_many :distributor_operations, dependent: :destroy
-  # accepts_nested_attributes_for :call_centers#, reject_if: :all_blank
+  belongs_to :orgnaization
+  has_many :requests
+
+  # has_many :providers
   ## -------------------- Validations --------------------- ##
-  # validates :role, :status, presence: true
   validates :role, presence: true
   validates :status, presence: true
-  validates :call_center_ids, presence: true, unless: (->(e) { e.super_admin? })
-  validates :role, exclusion: { in: %w[super_admin admin], if: (-> { Current.user&.admin? }) }
-  # debugger
-  # validates :call_center_ids, inclusion: { in: Current.user.call_centers.ids }
+  validates :full_name, presence: true
+  validates :email, presence: true, uniqueness: true
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##
-  def self.login(email, password, call_center)
-    return if call_center.users.nil?
-
-    user = call_center.users.find_by(email: email.downcase)
-    return false if user.blank? || user.password_digest.nil?
-    return false unless user.authenticate(password)
-
-    { user: user, orgnaization: call_center }
-  end
   ## ---------------------- Methods ----------------------- ##
 end

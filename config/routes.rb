@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :invoices
-  resources :distributor_operations
+  namespace :v1 do
+    resources :users
+  end
   root 'static_pages#home'
 
   get  '/help',    to: 'static_pages#help'
@@ -14,8 +15,11 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     resources :sessions
+    resources :requests
+    resources :providers
+    resources :provider_operations
+    resources :orgnaizations
   end
-  resources :call_centers
   resources :users
   resources :dasbord
 end

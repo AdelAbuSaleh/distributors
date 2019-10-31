@@ -10,70 +10,126 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_08_083339) do
+ActiveRecord::Schema.define(version: 2019_10_31_073545) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "call_centers", force: :cascade do |t|
+  create_table "orgnaizations", force: :cascade do |t|
     t.string "name", null: false
+    t.string "slug", null: false
     t.string "address", null: false
-    t.string "phone_numer"
-    t.string "services"
+    t.string "first_number"
+    t.string "second_number"
+    t.string "third_number"
+    t.string "mobile"
     t.string "email"
+    t.string "services"
     t.text "description"
     t.integer "status", default: 1, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "slag", default: "", null: false
-    t.index ["name", "status"], name: "index_call_centers_on_name_and_status"
+    t.index ["email"], name: "index_orgnaizations_on_email", unique: true, where: "(email IS NOT NULL)"
+    t.index ["mobile", "status"], name: "index_orgnaizations_on_mobile_and_status"
   end
 
-  create_table "distributor_operations", force: :cascade do |t|
-    t.string "name"
-    t.integer "operation_type", null: false
-    t.integer "quantity", null: false
+  create_table "provider_operations", force: :cascade do |t|
+    t.bigint "orgnaization_id", null: false
+    t.bigint "provider_id", null: false
+    t.integer "name"
+    t.integer "operation_type"
     t.integer "units_number"
-    t.float "cost", null: false
-    t.float "total", null: false
+    t.float "cost", default: 0.0
+    t.float "discount", default: 0.0
+    t.float "amount_paid", default: 0.0
+    t.float "remaining", default: 0.0
+    t.float "total", default: 0.0
+    t.integer "status"
     t.text "description"
-    t.datetime "opration_date", null: false
-    t.integer "status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.bigint "call_center_id"
-    t.index ["call_center_id"], name: "index_distributor_operations_on_call_center_id"
-    t.index ["name", "cost", "total"], name: "index_distributor_operations_on_name_and_cost_and_total"
-    t.index ["user_id"], name: "index_distributor_operations_on_user_id"
+    t.index ["orgnaization_id"], name: "index_provider_operations_on_orgnaization_id"
+    t.index ["provider_id"], name: "index_provider_operations_on_provider_id"
+    t.index ["status"], name: "index_provider_operations_on_status"
   end
 
-  create_table "employees_call_centers", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "call_center_id", null: false
+  create_table "providers", force: :cascade do |t|
+    t.string "full_name"
+    t.string "email"
+    t.string "city"
+    t.string "region"
+    t.integer "code_country", default: 967
+    t.string "mobile"
+    t.string "password_digest"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["call_center_id"], name: "index_employees_call_centers_on_call_center_id"
-    t.index ["user_id"], name: "index_employees_call_centers_on_user_id"
+    t.index ["email"], name: "index_providers_on_email", unique: true, where: "(email IS NOT NULL)"
+    t.index ["status"], name: "index_providers_on_status"
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "provider_id", null: false
+    t.string "name"
+    t.integer "request_type"
+    t.integer "units_number"
+    t.integer "quantity"
+    t.integer "status"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["provider_id"], name: "index_requests_on_provider_id"
+    t.index ["status"], name: "index_requests_on_status"
+    t.index ["user_id"], name: "index_requests_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "full_name"
-    t.string "user_name"
     t.string "email"
-    t.integer "country_code"
+    t.string "city"
+    t.string "region"
+    t.integer "code_country", default: 967
     t.string "mobile"
     t.string "password_digest"
     t.integer "role"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "orgnaization_id"
     t.index ["email"], name: "index_users_on_email", unique: true, where: "(email IS NOT NULL)"
-    t.index ["mobile"], name: "index_users_on_mobile", unique: true, where: "(mobile IS NOT NULL)"
+    t.index ["mobile", "status"], name: "index_users_on_mobile_and_status"
+    t.index ["orgnaization_id"], name: "index_users_on_orgnaization_id"
   end
 
-  add_foreign_key "distributor_operations", "call_centers", on_delete: :cascade
-  add_foreign_key "distributor_operations", "users", on_delete: :cascade
-  add_foreign_key "employees_call_centers", "call_centers", on_delete: :cascade
-  add_foreign_key "employees_call_centers", "users", on_delete: :cascade
+  create_table "v1_orgnaizations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "v1_provider_operations", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "v1_providers", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "v1_requests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "v1_sessions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "provider_operations", "orgnaizations", on_delete: :cascade
+  add_foreign_key "provider_operations", "providers", on_delete: :cascade
+  add_foreign_key "requests", "providers", on_delete: :cascade
+  add_foreign_key "requests", "users", on_delete: :cascade
+  add_foreign_key "users", "orgnaizations", on_delete: :cascade
 end

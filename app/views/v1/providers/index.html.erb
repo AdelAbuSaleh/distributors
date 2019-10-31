@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>V1 Providers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @v1_providers.each do |v1_provider| %>
+      <tr>
+        <td><%= link_to 'Show', v1_provider %></td>
+        <td><%= link_to 'Edit', edit_v1_provider_path(v1_provider) %></td>
+        <td><%= link_to 'Destroy', v1_provider, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New V1 Provider', new_v1_provider_path %>

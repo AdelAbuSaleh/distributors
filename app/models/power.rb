@@ -48,6 +48,10 @@ class Power
     end
   end
 
+  ######################## V1::StaticPagesController #######################
+  power :static_pages do
+    true
+  end
   ######################## V1::UsersController #######################
 
   power :users_index do

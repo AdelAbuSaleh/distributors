@@ -1,16 +1,20 @@
 # frozen_string_literal: true
 
 class V1::SessionsController < ApplicationController
-  skip_before_action :validate_token!
+  skip_before_action :validate_token!#, only: :create
   power :sessions
+
   def new; end
 
   def create
-    call_center = CallCenter.find_by(slag: login_params[:slag])
-    return flash.now[:danger] = 'Invalid login' unless call_center
+    # return flash.now[:danger] = 'Missing params' if missing_params!(:email, :password)
+    debugger
+    user = VerifyLogin.login(login_params)
+    # return render_bad_request(message: I18n.t('errors.sessions.1303')) unless user
+    # return flash.now[:danger] = 'Invalid login' unless user
 
-    user_and_org = User.login(login_params[:email], login_params[:password], call_center)
-    ensure_login user_and_org
+    # render_success(message: I18n.t('sessions.login_successfully'), data: data)
+    ensure_login user
   end
 
   def destroy
@@ -18,9 +22,9 @@ class V1::SessionsController < ApplicationController
     redirect_to root_url
   end
 
-  def ensure_login(user_and_orgnization)
-    if user_and_orgnization.present?
-      data = { token: generate_token(user_and_orgnization) }
+  def ensure_login(user)
+    if user.present?
+      data = { token: generate_token(user) }
       flash[:success] = 'Welcome to the Rahma-app!'
       log_in data
       redirect_to root_url
@@ -31,20 +35,20 @@ class V1::SessionsController < ApplicationController
   end
 
   # Session Meta Payload (token )
-  def generate_token(user_and_orgnization)
-    login_payload =
+  # Generate user token
+  def generate_token(user)
+    payload =
       {
-        id: user_and_orgnization[:user].id,
-        user_name: user_and_orgnization[:user].user_name,
-        role: user_and_orgnization[:user].role,
-        email: user_and_orgnization[:user].email,
-        orgnization_id: user_and_orgnization[:orgnaization].id
+        id: user.id,
+        email: user.email,
+        orgnaization_id: user.try(:orgnaization)&.id,
+        slug: user.try(:orgnaization)&.slug
       }
-
-    JsonWebToken.encode(login_payload, 8.hours.from_now)
+    JsonWebToken.encode(payload, 72.hours.from_now)
   end
 
+  # Whitelist parameters
   def login_params
-    params.require(:session).permit(:email, :slag, :password).to_h.symbolize_keys
+    params.permit(:email, :slug, :password) # .to_h.symbolize_keys
   end
 end

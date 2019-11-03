@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class V1::ProvidersController < ApplicationController
-  before_action :set_v1_provider, only: [:show, :edit, :update, :destroy]
+  before_action :set_v1_provider, only: %i[show edit update destroy]
 
   # GET /v1/providers
   # GET /v1/providers.json
@@ -9,8 +11,7 @@ class V1::ProvidersController < ApplicationController
 
   # GET /v1/providers/1
   # GET /v1/providers/1.json
-  def show
-  end
+  def show; end
 
   # GET /v1/providers/new
   def new
@@ -18,8 +19,7 @@ class V1::ProvidersController < ApplicationController
   end
 
   # GET /v1/providers/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /v1/providers
   # POST /v1/providers.json
@@ -62,13 +62,14 @@ class V1::ProvidersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_v1_provider
-      @v1_provider = V1::Provider.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def v1_provider_params
-      params.fetch(:v1_provider, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_v1_provider
+    @v1_provider = V1::Provider.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def v1_provider_params
+    params.fetch(:v1_provider, {})
+  end
 end

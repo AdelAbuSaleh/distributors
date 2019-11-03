@@ -1,14 +1,16 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "invoices/edit", type: :view do
+RSpec.describe 'invoices/edit', type: :view do
   before(:each) do
-    @invoice = assign(:invoice, Invoice.create!())
+    @invoice = assign(:invoice, Invoice.create!)
   end
 
-  it "renders the edit invoice form" do
+  it 'renders the edit invoice form' do
     render
 
-    assert_select "form[action=?][method=?]", invoice_path(@invoice), "post" do
+    assert_select 'form[action=?][method=?]', invoice_path(@invoice), 'post' do
     end
   end
 end

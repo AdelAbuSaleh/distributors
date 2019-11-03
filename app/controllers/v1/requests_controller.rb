@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class V1::RequestsController < ApplicationController
-  before_action :set_v1_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_v1_request, only: %i[show edit update destroy]
 
   # GET /v1/requests
   # GET /v1/requests.json
@@ -9,8 +11,7 @@ class V1::RequestsController < ApplicationController
 
   # GET /v1/requests/1
   # GET /v1/requests/1.json
-  def show
-  end
+  def show; end
 
   # GET /v1/requests/new
   def new
@@ -18,8 +19,7 @@ class V1::RequestsController < ApplicationController
   end
 
   # GET /v1/requests/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /v1/requests
   # POST /v1/requests.json
@@ -62,13 +62,14 @@ class V1::RequestsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_v1_request
-      @v1_request = V1::Request.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def v1_request_params
-      params.fetch(:v1_request, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_v1_request
+    @v1_request = V1::Request.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def v1_request_params
+    params.fetch(:v1_request, {})
+  end
 end

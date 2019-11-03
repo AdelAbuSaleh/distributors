@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe "v1/providers/show", type: :view do
+RSpec.describe 'v1/providers/show', type: :view do
   before(:each) do
-    @v1_provider = assign(:v1_provider, V1::Provider.create!())
+    @v1_provider = assign(:v1_provider, V1::Provider.create!)
   end
 
-  it "renders attributes in <p>" do
+  it 'renders attributes in <p>' do
     render
   end
 end

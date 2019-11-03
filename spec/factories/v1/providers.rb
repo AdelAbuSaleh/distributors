@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: v1_providers
@@ -9,6 +11,5 @@
 
 FactoryBot.define do
   factory :v1_provider, class: 'V1::Provider' do
-    
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: requests
@@ -17,6 +19,5 @@
 
 FactoryBot.define do
   factory :request do
-    
   end
 end

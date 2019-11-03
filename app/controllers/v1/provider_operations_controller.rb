@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class V1::ProviderOperationsController < ApplicationController
-  before_action :set_v1_provider_operation, only: [:show, :edit, :update, :destroy]
+  before_action :set_v1_provider_operation, only: %i[show edit update destroy]
 
   # GET /v1/provider_operations
   # GET /v1/provider_operations.json
@@ -9,8 +11,7 @@ class V1::ProviderOperationsController < ApplicationController
 
   # GET /v1/provider_operations/1
   # GET /v1/provider_operations/1.json
-  def show
-  end
+  def show; end
 
   # GET /v1/provider_operations/new
   def new
@@ -18,8 +19,7 @@ class V1::ProviderOperationsController < ApplicationController
   end
 
   # GET /v1/provider_operations/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /v1/provider_operations
   # POST /v1/provider_operations.json
@@ -62,13 +62,14 @@ class V1::ProviderOperationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_v1_provider_operation
-      @v1_provider_operation = V1::ProviderOperation.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def v1_provider_operation_params
-      params.fetch(:v1_provider_operation, {})
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_v1_provider_operation
+    @v1_provider_operation = V1::ProviderOperation.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def v1_provider_operation_params
+    params.fetch(:v1_provider_operation, {})
+  end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class V1::UsersController < ApplicationController
-  before_action :set_v1_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_v1_user, only: %i[show edit update destroy]
 
   # GET /v1/users
   # GET /v1/users.json
@@ -9,8 +11,7 @@ class V1::UsersController < ApplicationController
 
   # GET /v1/users/1
   # GET /v1/users/1.json
-  def show
-  end
+  def show; end
 
   # GET /v1/users/new
   def new
@@ -18,8 +19,7 @@ class V1::UsersController < ApplicationController
   end
 
   # GET /v1/users/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /v1/users
   # POST /v1/users.json
@@ -62,24 +62,25 @@ class V1::UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_v1_user
-      @v1_user = V1::User.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def v1_user_params
-      params.require(:user).permit(
-        :full_name,
-        :email,
-        :city,
-        :orgnaization_id,
-        :region,
-        :code_country,
-        :mobile,
-        :password,
-        :role,
-        :status
-      )
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_v1_user
+    @v1_user = V1::User.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def v1_user_params
+    params.require(:user).permit(
+      :full_name,
+      :email,
+      :city,
+      :orgnaization_id,
+      :region,
+      :code_country,
+      :mobile,
+      :password,
+      :role,
+      :status
+    )
+  end
 end

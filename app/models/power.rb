@@ -69,7 +69,7 @@ class Power
   end
 
   power :creatable_users do
-    return User #if provider?# if super_admin? # || admin? 
+    return User # if provider?# if super_admin? # || admin?
 
     powerless!
   end

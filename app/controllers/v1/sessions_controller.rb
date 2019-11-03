@@ -1,27 +1,13 @@
 # frozen_string_literal: true
 
 class V1::SessionsController < ApplicationController
-  skip_before_action :validate_token!#, only: :create
+  skip_before_action :validate_token! # , only: :create
   power :sessions
 
   def new; end
 
   def create
-    # return flash.now[:danger] = 'Missing params' if missing_params!(:email, :password)
     user = VerifyLogin.login(login_params)
-    # return render_bad_request(message: I18n.t('errors.sessions.1303')) unless user
-    # return flash.now[:danger] = 'Invalid login' unless user
-
-    # render_success(message: I18n.t('sessions.login_successfully'), data: data)
-    ensure_login user
-  end
-
-  def destroy
-    log_out
-    redirect_to root_url
-  end
-
-  def ensure_login(user)
     if user.present?
       data = { user: user, orgnaization: user.try(:orgnaization), token: generate_token(user) }
       flash[:success] = 'Welcome to the Rahma-app!'
@@ -31,6 +17,11 @@ class V1::SessionsController < ApplicationController
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
     end
+  end
+
+  def destroy
+    log_out
+    redirect_to root_url
   end
 
   # Session Meta Payload (token )
@@ -48,6 +39,6 @@ class V1::SessionsController < ApplicationController
 
   # Whitelist parameters
   def login_params
-    params.require(:session).permit(:email, :slug, :password)#.to_h.symbolize_keys
+    params.require(:session).permit(:email, :slug, :password)
   end
 end

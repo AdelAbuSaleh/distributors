@@ -52,6 +52,7 @@ class AuthenticateRequest
   def auth_token
     return token if token.present?
 
-    raise(CustomException::MissingToken, 'token is missing')
+    false
+    # raise(CustomException::MissingToken, 'token is missing')
   end
 end

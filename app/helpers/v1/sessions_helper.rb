@@ -8,22 +8,23 @@ module V1::SessionsHelper
 
   # Returns the current logged-in user (if any).
   def current_user
-    @current_user = @token[:user] if valid_token?
+    @current_user ||= @token[:user] if valid_token?
   end
 
   # Returns the current logged-in user (if any).
   def current_organization
-    @current_organization = @token[:user] if valid_token?
+    @current_organization ||= @token[:orgnaization] if valid_token?
   end
 
   # Returns true if the user is logged in, false otherwise.
   def logged_in?
-    debugger
     !current_user.nil?
   end
 
   # decode authentication token
   def valid_token?
+    return unless session[:token]
+
     @token ||= AuthenticateRequest.get(session[:token])
   end
 

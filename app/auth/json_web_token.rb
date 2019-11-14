@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Create JsonWebToken For Authentication
 class JsonWebToken
   # secret to encode and decode token
   HMAC_SECRET = ENV['SECRET_KEY_BASE'] # Rails.application.credentials.secret_key_base

@@ -51,4 +51,5 @@ class User < ApplicationRecord
   ## --------------------- Callbacks ---------------------- ##
   ## ------------------- Class Methods -------------------- ##
   ## ---------------------- Methods ----------------------- ##
+  delegate :id, :slug, :name, :email, to: :orgnaization, prefix: true, allow_nil: true
 end

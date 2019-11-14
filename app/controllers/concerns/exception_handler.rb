@@ -5,14 +5,14 @@ module ExceptionHandler
 
   included do
     # Handle all exceptions
-    rescue_from StandardError,                      with: :server_error!
-    rescue_from I18n::InvalidLocale,                with: :i18n_invalid_locale!
-    rescue_from Consul::Powerless,                  with: :consul_powerless!
-    rescue_from ActiveRecord::RecordNotFound,       with: :record_not_found!
-    rescue_from JWT::VerificationError,               with: :jwt_verification_error!
-    rescue_from JWT::DecodeError,                     with: :jwt_decode_error!
-    rescue_from JWT::ExpiredSignature,                with: :jwt_expired_signature!
-    rescue_from CustomException::AuthUserNotFound,    with: :auth_user_not_found!
+    rescue_from StandardError,                     with: :server_error!
+    rescue_from I18n::InvalidLocale,               with: :i18n_invalid_locale!
+    rescue_from Consul::Powerless,                 with: :consul_powerless!
+    rescue_from ActiveRecord::RecordNotFound,      with: :record_not_found!
+    rescue_from JWT::VerificationError,            with: :jwt_verification_error!
+    rescue_from JWT::DecodeError,                  with: :jwt_decode_error!
+    rescue_from JWT::ExpiredSignature,             with: :jwt_expired_signature!
+    rescue_from CustomException::AuthUserNotFound, with: :auth_user_not_found!
   end
 
   # The message of record not found, can be customized by override it to the controllers

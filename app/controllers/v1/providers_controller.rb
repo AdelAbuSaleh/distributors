@@ -70,6 +70,16 @@ class V1::ProvidersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def v1_provider_params
-    params.fetch(:v1_provider, {})
+    params.require(:provider).permit(
+      :full_name,
+      :email,
+      :city,
+      :region,
+      :code_country,
+      :mobile,
+      :password_digest,
+      :user_id,
+      :status
+    )
   end
 end

@@ -7,6 +7,7 @@ class V1::SessionsController < ApplicationController
   def new; end
 
   def create
+    debugger
     user = VerifyLogin.login(login_params)
     if user.present?
       data = { user: user, orgnaization: user.try(:orgnaization), token: generate_token(user) }

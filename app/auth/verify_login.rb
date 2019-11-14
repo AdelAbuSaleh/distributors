@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Validate user access
 class VerifyLogin
   attr_reader :params
 

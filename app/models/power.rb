@@ -20,7 +20,7 @@ class Power
 
   # get the role form current users
   def role
-    return unless user?
+    return if user?.blank? || provider?
 
     @current_user.role.to_s
   end
@@ -37,10 +37,6 @@ class Power
     true if role.eql?('employee')
   end
 
-  def distributor?
-    true if role.eql?('distributor')
-  end
-
   # Generate powers for all tables and by default prevent them all from access
   ActiveRecord::Base.connection.tables.map(&:to_sym) - %i[schema_migrations ar_internal_metadata].each do |model|
     power model do
@@ -52,6 +48,7 @@ class Power
   power :static_pages do
     true
   end
+
   ######################## V1::UsersController #######################
 
   power :users_index do
@@ -69,7 +66,7 @@ class Power
   end
 
   power :creatable_users do
-    return User # if provider?# if super_admin? # || admin?
+    return User if super_admin? || admin?
 
     powerless!
   end
@@ -103,7 +100,7 @@ class Power
   end
 
   power :creatable_orgnaizations do
-    return Orgnaization # if super_admin?
+    return Orgnaization if super_admin?
 
     powerless!
   end
@@ -126,67 +123,53 @@ class Power
 
   ######################## V1::RequestController #######################
 
-  power :requests_index do
-    Request
-  end
+  power :requests_index, :request_show do
+    return @current_orgnaization.requests if admin?
+    return @current_user.requests if employee?
+    return @current_user.requests if provider?
 
-  power :request_show do
-    Request
+    powerless!
   end
 
   power :creatable_request do
-    Request
+    return Request if admin? || employee?
+
+    powerless!
   end
 
   power :updatable_request do
-    Request
+    return Request if admin? || employee? || provider?
+
+    powerless!
   end
 
   power :destroyable_request do
-    Request
+    return Request if admin? || employee?
+
+    powerless!
   end
 
-  ######################## V1::ProviderOperationsController #######################
+  ######################## V1::ProviderOperationsController ####################
 
-  power :provider_operations_index do
-    ProviderOperation
+  power :provider_operations_index, :provider_operations_show do
+    return @current_user&.provider_operations if provider?
+    return @current_orgnaization&.provider_operations if admin? || employee?
+
+    # return ProviderOperation if super_admin?
+    powerless!
   end
 
-  power :provider_operations_show do
-    ProviderOperation
-  end
+  power :creatable_provider_operations, :updatable_provider_operations, :destroyable_provider_operations do
+    return ProviderOperation if provider?
 
-  power :creatable_provider_operations do
-    ProviderOperation
-  end
-
-  power :updatable_provider_operations do
-    ProviderOperation
-  end
-
-  power :destroyable_provider_operations do
-    ProviderOperation
+    powerless!
   end
 
   ######################## V1::ProvidersController #######################
 
-  power :providers_index do
-    Provider
-  end
+  power :providers_index, :providers_show, :creatable_providers, :updatable_providers, :destroyable_providers do
+    return Provider if super_admin?
 
-  power :providers_show do
-    Provider
-  end
-
-  power :creatable_providers do
-    Provider
-  end
-
-  power :updatable_providers do
-    Provider
-  end
-
-  power :destroyable_providers do
-    Provider
+    powerless!
   end
 end

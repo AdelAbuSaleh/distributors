@@ -34,6 +34,7 @@ class Orgnaization < ApplicationRecord
   ## -------------------- Associations -------------------- ##
   has_many :users
   has_many :provider_operations # , through: :users
+  has_many :requests, through: :users
   ## -------------------- Validations --------------------- ##
   validates :name, :slug, :email, :status, presence: true
   ## --------------------- Callbacks ---------------------- ##

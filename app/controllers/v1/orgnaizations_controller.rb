@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# OrgnaizationsController
 class V1::OrgnaizationsController < ApplicationController
   before_action :set_v1_orgnaization, only: %i[show edit update destroy]
 
@@ -70,6 +71,15 @@ class V1::OrgnaizationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def v1_orgnaization_params
-    params.fetch(:v1_orgnaization, {})
+    params.require(:orgnaization).permit(
+      :name,
+      :slug,
+      :address,
+      :phone_numbers,
+      :email,
+      :services,
+      :description,
+      :status
+    )
   end
 end

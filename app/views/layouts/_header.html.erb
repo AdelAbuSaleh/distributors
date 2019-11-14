@@ -13,7 +13,7 @@
           </ul>
         </div>
       <% end %>
-      <%if current_user&.super_admin?  %>
+      <%if current_user.try(:super_admin)  %>
         <div class="nav-container">
           <ul class="nav-items">
             <li class="nav-item"><%= link_to "الرئيسية", "#" %></li>
@@ -41,7 +41,7 @@
           </li>
           </ul>
         </div>
-        <% elsif current_user&.admin? %>
+        <% elsif current_user.try(:admin) %>
           <div class="nav-container">
             <ul class="nav-items">
               <li class="nav-item"><%= link_to "الرئيسية", "#" %></li>
@@ -62,7 +62,7 @@
               </li>
             </ul>
           </div>
-        <% elsif current_user&.employee? %>
+        <% elsif current_user.try(:employee) %>
           <div class="nav-container">
             <ul class="nav-items">
               <li class="nav-item"><%= link_to "الرئيسية", "#" %></li>
@@ -74,14 +74,14 @@
               <li class="nav-item"><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
             </ul>
           </div>
-        <% elsif current_user&.distributor? %>
+        <% elsif provider? %>
           <div class="nav-container">
             <ul class="nav-items">
               <li class="nav-item"><%= link_to "الرئيسية", root_url %></li>
-              <li class="nav-item"><%= link_to "فاتورة جديدة", new_invoice_url %></li>
-              <li class="nav-item"><%= link_to "عملية جديدة ", new_distributor_operation_url %></li>
+              <li class="nav-item"><%= link_to "الطلبات", "#" %></li>
+              <li class="nav-item"><%= link_to "عملية جديدة ", "#" %></li>
               <li class="nav-item"><%= link_to "خدمات أخرى", "#" %></li>
-              <li class="nav-item"><%= link_to "التقارير", dasbord_index_url %></li>
+              <li class="nav-item"><%= link_to "التقارير", "#" %></li>
               <li class="nav-item"><%= link_to "الرصيد", "#" %></li>
               <li class="nav-item"><%= link_to "تسجيل الخروج", logout_path, method: "delete" %></li>
              </ul>

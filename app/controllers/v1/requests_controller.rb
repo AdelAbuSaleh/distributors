@@ -70,6 +70,22 @@ class V1::RequestsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def v1_request_params
-    params.fetch(:v1_request, {})
+    params.require(:request).permit(
+      :user_id,
+      :provider_id,
+      :name,
+      :request_type,
+      :units_number,
+      :quantity,
+      :status,
+      :description
+    )
   end
+
+  def params_processed
+    return params.require(:request).permit(:status) if @current_user.try(:orgnaization).nil?
+
+    resource_params
+  end
+
 end

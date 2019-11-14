@@ -70,6 +70,19 @@ class V1::ProviderOperationsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def v1_provider_operation_params
-    params.fetch(:v1_provider_operation, {})
+    params.require(:provideroperation).permit(
+      :orgnaization_id,
+      :provider_id,
+      :name,
+      :operation_type,
+      :units_number,
+      :cost,
+      :discount,
+      :amount_paid,
+      :remaining,
+      :total,
+      :status,
+      :description
+    )
   end
 end

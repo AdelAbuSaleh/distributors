@@ -4,11 +4,11 @@
 lock '~> 3.11.0'
 
 set :application, 'comunication_app'
-set :repo_url, 'git@gitlab.com:clickAppsCo/backend_newborn.git'
+set :repo_url, 'git@bitbucket.org:adelsaleh46/rahma_app.git'
 set :rails_env, fetch(:stage)
 append :rvm_map_bins, 'rails'
 
-set :deploy_to, "/var/www/html/#{fetch(:application)}#{fetch(:stage)}"
+set :deploy_to, "/var/www/html/comunication_app"
 
 set :format_options, command_output: true,
                      log_file: 'log/capistrano.log',

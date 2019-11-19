@@ -15,7 +15,7 @@ set :format_options, command_output: true,
                      color: :auto,
                      truncate: false
 set :rvm_type, :user
-set :rvm_ruby_version, '2.5.1@rahma_app'
+set :rvm_ruby_version, '2.5.1'
 
 append :linked_files, 'config/database.yml', 'config/master.key', '.env'
 

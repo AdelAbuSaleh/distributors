@@ -6,19 +6,16 @@ class CreateOrgnaizations < ActiveRecord::Migration[5.2]
       t.string :name, null: false, unique: true
       t.string :slug, null: false, unique: true
       t.string :address, null: false
-      t.string :first_number
-      t.string :second_number
-      t.string :third_number
-      t.string :mobile
+      t.string :phone_numbers
       t.string :email
       t.string :services
       t.text :description
+      t.string  :city
       t.integer :status, null: false, default: 1
 
       t.timestamps
 
-      t.index(:email, unique: true, where: 'email IS NOT NULL')
-      t.index(%i[mobile status])
+      t.index(%i[slug status])
     end
   end
 end

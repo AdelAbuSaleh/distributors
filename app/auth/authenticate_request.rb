@@ -15,6 +15,7 @@ class AuthenticateRequest
 
   # Service entry point - return valid user object
   def call
+    return unless decoded_auth_token
     {
       user: user,
       email: decoded_auth_token['email'],
@@ -26,9 +27,7 @@ class AuthenticateRequest
   private
 
   def user
-    return @user ||= User.find(decoded_auth_token['id']) if decoded_user?
-
-    @provider ||= Provider.find(decoded_auth_token['id']) if decoded_provider?
+    @user ||= User.find(decoded_auth_token['id']) if decoded_auth_token
 
     # handle user not found
   rescue ActiveRecord::RecordNotFound
@@ -39,14 +38,6 @@ class AuthenticateRequest
   # decode authentication token
   def decoded_auth_token
     @decoded_auth_token ||= JsonWebToken.decode(auth_token)
-  end
-
-  def decoded_user?
-    decoded_auth_token && decoded_auth_token['slug'].present?
-  end
-
-  def decoded_provider?
-    decoded_auth_token && decoded_auth_token['slug'].nil?
   end
 
   # check for auth_token in `Authorization` header

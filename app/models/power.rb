@@ -121,6 +121,9 @@ class Power
     true
   end
 
+  power :invoices do
+    Invoice
+  end
   ######################## V1::RequestController #######################
 
   power :requests_index, :request_show do

@@ -15,10 +15,10 @@ Rails.application.routes.draw do
 
   namespace :v1 do
     resources :sessions
-    resources :requests
-    resources :providers
-    resources :provider_operations
     resources :orgnaizations
+    resources :users
+    resources :invoices
+    resources :invoice_infos
   end
   resources :users
   resources :dasbord

@@ -2,17 +2,13 @@
 
 # Authinticat Users
 module V1::SessionsHelper
-  def authorization(data)
-    session[:token] = data[:token]
+  def authorization(token)
+    session[:token] = token
   end
 
   # Returns the current logged-in user (if any).
   def current_user
     @current_user ||= @token[:user] if valid_token?
-  end
-
-  def provider?
-    @current_user ||= @token[:user].try(:orgnaization).nil? if valid_token?
   end
 
   # Returns the current logged-in user (if any).

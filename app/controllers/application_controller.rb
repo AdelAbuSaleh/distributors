@@ -22,12 +22,12 @@ class ApplicationController < ActionController::Base
     @token = AuthenticateRequest.get(session[:token])
     flash[:error] = 'Invalid Authorization!' unless @token[:user]
     redirect_to(root_url) && return if @token[:user].nil?
-    # set_curret_user_with_access
+    set_curret_user_with_access
   end
 
   def set_curret_user_with_access
     @current_user = @token[:user]
-    @current_organization = CallCenter.find(@token[:orgnization_id])
+    @current_organization = Orgnaization.find(@token[:orgnaization_id])
   end
 
   def set_current_user

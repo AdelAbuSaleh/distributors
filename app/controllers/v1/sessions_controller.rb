@@ -9,9 +9,8 @@ class V1::SessionsController < ApplicationController
   def create
     user = VerifyLogin.login(login_params)
     if user.present?
-      data = { user: user, orgnaization: user.try(:orgnaization), token: generate_token(user) }
       flash[:success] = 'Welcome to the Rahma-app!'
-      authorization(data)
+      authorization(generate_token(user))
       redirect_to root_url
     else
       flash.now[:danger] = 'Invalid email/password combination'
@@ -31,14 +30,14 @@ class V1::SessionsController < ApplicationController
       {
         id: user.id,
         email: user.email,
-        orgnaization_id: user.try(:orgnaization)&.id,
-        slug: user.try(:orgnaization)&.slug
+        orgnaization_id: user.orgnaization_id,
+        slug: user.orgnaization.slug
       }
     JsonWebToken.encode(payload, 72.hours.from_now)
   end
 
   # Whitelist parameters
   def login_params
-    params.require(:session).permit(:email, :slug, :password)
+    params.require(:session).permit(:login, :slug, :password)
   end
 end

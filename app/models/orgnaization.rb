@@ -28,13 +28,13 @@ class Orgnaization < ApplicationRecord
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##
   enumerize :status, in: {
-    active: 0,
-    inactive: 1
+    active: 1,
+    inactive: 2
   }, default: 1, scope: true, predicates: true
   ## -------------------- Associations -------------------- ##
-  has_many :users
-  has_many :provider_operations # , through: :users
-  has_many :requests, through: :users
+  has_many :users, inverse_of: :orgnaization, dependent: :destroy
+  has_many :invoices, inverse_of: :orgnaization, dependent: :destroy
+  # has_many :invoice_infos, through: :invoices
   ## -------------------- Validations --------------------- ##
   validates :name, :slug, :email, :status, presence: true
   ## --------------------- Callbacks ---------------------- ##

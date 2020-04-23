@@ -28,19 +28,19 @@ class User < ApplicationRecord
   ## --------------------- Constants ---------------------- ##
   ## ----------------------- Enums ------------------------ ##
   enumerize :role, in: {
-    super_admin: 0,
-    admin: 1,
-    employee: 2
-  }, default: 1, scope: true, predicates: true
+    super_admin: 1,
+    admin: 2,
+    employee: 3
+  }, default: 3, scope: true, predicates: true
 
   # User statuses
   enumerize :status, in: {
-    active: 0,
-    inactive: 1
+    active: 1,
+    inactive: 2
   }, default: 1, scope: true, predicates: true
   ## -------------------- Associations -------------------- ##
   belongs_to :orgnaization
-  has_many :requests
+  # has_many :requests
 
   # has_many :providers
   ## -------------------- Validations --------------------- ##

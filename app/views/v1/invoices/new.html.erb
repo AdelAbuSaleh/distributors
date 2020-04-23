@@ -1,0 +1,18 @@
+<%# <h1>New V1 Provider Operation</h1>
+
+<%= render 'form', v1_invoice: @v1_invoice %>
+
+<%# <%= link_to 'Back', v1_invoices_path %>
+
+
+<h1> انشاء فاتورة جديدة </h1>
+  <div>
+    <%= form_with url: v1_invoices_path do |f| %>
+    <%= render 'form', f: f %> </br>
+
+    <%= f.submit "أنشاء الفاتورة", class: "btn btn-primary" %>
+    <% end %>
+  </div> </br> </br>  </br> </br>   </br>  </br>  </br></br>
+
+
+  <%= link_to 'Back', v1_invoices_path %>
